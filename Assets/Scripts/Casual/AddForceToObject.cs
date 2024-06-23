@@ -5,7 +5,8 @@ public class AddForceToObject : MonoBehaviour
     public int Strengh = 10;
     public Vector3 Direction;
     private int Timer = 0;
-    void FixedUpdate()
+
+    private void FixedUpdate()
     {
         if (Timer < 3)
         {
