@@ -351,3 +351,13 @@ Library/Artifacts/fe/fe96115430ec191fc396417104b581f9
 Library/Bee/artifacts/2000b0aEDbg.dag/Assembly-CSharp.dll
 Library/Bee/artifacts/2000b0aEDbg.dag/Assembly-CSharp.pdb
 Library/Bee/artifacts/2000b0aEDbg.dag/Assembly-CSharp.ref.dll
+Library/ArtifactDB
+Library/Bee/tundra.log.json
+Library/Bee/TundraBuildState.state
+Library/ilpp.pid
+Library/SourceAssetDB
+Logs/AssetImportWorker0-prev.log
+Logs/AssetImportWorker1-prev.log
+Temp/FSTimeGet-556dde4356a78a648975277b9b837a75
+Temp/FSTimeGet-5d7c9490ac2c7ea49b9737f670170092
+Temp/UnityLockfile
