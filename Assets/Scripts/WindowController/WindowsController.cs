@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class WindowsController : MonoBehaviour
+public abstract class WindowsController : MonoBehaviour
 {
     [SerializeField] protected Window[] windows;
-
 }

@@ -22,7 +22,7 @@ public class MenuWindowsController : WindowsController
         if (Current == null)
             return;
 
-        Window window = windows.Single(x => x.windowName == Current);
+        Window window = windows.Single(x => x.WindowName == Current);
         window.Close();
 
         Current = null;
@@ -36,15 +36,15 @@ public class MenuWindowsController : WindowsController
             return;
         }
 
-        Window window = windows.Single(x => x.windowName == windowName);
+        Window window = windows.Single(x => x.WindowName == windowName);
 
-        Current = window.windowName;
+        Current = window.WindowName;
 
         foreach (Window m in windows.Where(x => x.IsOpened))
             m.Close();
 
         window.Open();
-        Debug.Log($"Window: Open {window.windowName}");
+        Debug.Log($"Window: Open {window.WindowName}");
     }
 
     public void OpenWindow(Window window)
@@ -54,6 +54,6 @@ public class MenuWindowsController : WindowsController
         
         window.Open();
         
-        Debug.Log($"Window: Open {window.windowName}");
+        Debug.Log($"Window: Open {window.WindowName}");
     }
 }

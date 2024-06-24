@@ -9,7 +9,7 @@ namespace Web
 {
     public class WebUIController : MonoBehaviour
     {
-        private CanvasManager canvasManager;
+        private MenuWindowsController _menuWindowsController;
 
         [Header("Login")]
         [SerializeField] private TMP_InputField LoginText;
@@ -51,21 +51,21 @@ namespace Web
         private List<GameObject> items = new List<GameObject>();
         private void Start()
         {
-            _webManager = FindObjectOfType<WebManager>();
-            canvasManager = FindObjectOfType<CanvasManager>();
+            _webManager = FindAnyObjectByType<WebManager>();
+            _menuWindowsController = FindAnyObjectByType<MenuWindowsController>();
             _playerService = FindAnyObjectByType<PlayerService>();
 
             SendButtonRegister.onClick.AddListener(SendRegisterData);
 
             LeaderBoardButton.onClick.AddListener(_webManager.GetLeaderBoard);
-            shopButton.onClick.AddListener(() => { _webManager.GetItems(); canvasManager.OpenMenu("Shop"); }) ;
+            shopButton.onClick.AddListener(() => { _webManager.GetItems(); _menuWindowsController.OpenMenu("Shop"); }) ;
 
             _webManager.OnError.AddListener(() => StartCoroutine(StartErrorTimer()));
 
             _webManager.OnLogged.AddListener(() => { 
                 OnlineButton.onClick.RemoveAllListeners();
-                OnlineButton.onClick.AddListener(() => canvasManager.OpenMenu("Online(Logged)"));
-                canvasManager.OpenMenu("Statistic");
+                OnlineButton.onClick.AddListener(() => _menuWindowsController.OpenMenu("Online(Logged)"));
+                _menuWindowsController.OpenMenu("Statistic");
                 });
 
             ErrorText.text = "";
@@ -73,12 +73,12 @@ namespace Web
             OnlineButton.onClick.RemoveAllListeners();
             if (_playerService.GetStatus == PlayerStatus.logged)
             {
-                OnlineButton.onClick.AddListener(() => { canvasManager.OpenMenu("Online(Logged)"); SetPlayerData(_playerService.GetPlayerData); });
+                OnlineButton.onClick.AddListener(() => { _menuWindowsController.OpenMenu("Online(Logged)"); SetPlayerData(_playerService.GetPlayerData); });
             }
             else
             {
                 SendLoginButton.onClick.AddListener(() => { SendLoginData(); });
-                OnlineButton.onClick.AddListener(() => canvasManager.OpenMenu("Online(Anonyme)"));
+                OnlineButton.onClick.AddListener(() => _menuWindowsController.OpenMenu("Online(Anonyme)"));
             }
         }
 

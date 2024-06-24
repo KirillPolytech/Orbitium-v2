@@ -31,7 +31,7 @@ namespace Web
         private PlayerService _playerService;
         private MainPlayer _mainPlayer;
         private InGameTime _timer;
-        private CanvasManager _canvasManager;
+        private CanvasManager _menuWindowsController;
         private WebUIController UI;
         private void Awake()
         {
@@ -42,8 +42,8 @@ namespace Web
         {
             Initializate();
 
-            OnLogged.AddListener( () => _canvasManager.OpenMenu("Statistic") );
-            OnRegistered.AddListener( () => _canvasManager.OpenMenu("Statistic") );
+            OnLogged.AddListener( () => _menuWindowsController.OpenMenu("Statistic") );
+            OnRegistered.AddListener( () => _menuWindowsController.OpenMenu("Statistic") );
 
             if (_mainPlayer != null)
             {
@@ -64,7 +64,7 @@ namespace Web
             _mainPlayer = FindAnyObjectByType<MainPlayer>();
             _playerService = FindObjectOfType<PlayerService>();
             _timer = FindObjectOfType<InGameTime>();
-            _canvasManager = FindObjectOfType<CanvasManager>();
+            _menuWindowsController = FindObjectOfType<CanvasManager>();
             UI = FindObjectOfType<WebUIController>();
         }
         // check
