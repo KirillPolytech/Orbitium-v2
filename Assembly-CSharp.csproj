@@ -52,6 +52,7 @@
     <Compile Include="Assets\Scripts\InfinityLevels\LevelCreator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Enemies\PassiveEnemy.cs" />
+    <Compile Include="Assets\Scripts\WindowController\Window.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\CollectablesCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Music\PlayClick.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\Scripts\Casual Mode\Ui\AvailableLevels.cs" />
     <Compile Include="Assets\Yandex\YandexIntegration.cs" />
     <Compile Include="Assets\Scripts\WebLogic\RequestType.cs" />
+    <Compile Include="Assets\Scripts\WindowController\WindowsController.cs" />
     <Compile Include="Assets\Scripts\TutorialVideoPlayer.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\Circle\CircleRotation.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Rotation\RotatingY.cs" />
@@ -94,9 +96,11 @@
     <Compile Include="Assets\Scripts\WebLogic\Contracts\RegisterData.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Score.cs" />
     <Compile Include="Assets\Scripts\Menu\Menu.cs" />
+    <Compile Include="Assets\Scripts\WindowController\MenuWindowsController.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Rotation\RotateAround.cs" />
     <Compile Include="Assets\Scripts\GlobalVariables.cs" />
     <Compile Include="Assets\Scripts\Preferences\FPS.cs" />
+    <Compile Include="Assets\Scripts\SO\StorySO.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\FenceRotation.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\StaticPlanet.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Ui\LevelsData.cs" />
