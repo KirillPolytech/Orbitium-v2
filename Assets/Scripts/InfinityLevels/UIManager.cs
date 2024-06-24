@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
-
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI LevelPassed;
     [SerializeField] private TextMeshProUGUI TimeText;
@@ -22,14 +20,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Toggle GodMode;
 
     private MainPlayer _player;
-    public void Initialize()
+    public void Awake()
     {
-        if (Instance == null) 
-            Instance = this;
-        else 
-            Destroy(gameObject);
-
-        _player = FindObjectOfType<MainPlayer>();
+        _player = FindAnyObjectByType<MainPlayer>();
 
         // After Restart Settings.
         WinCanvas.enabled = false;
@@ -38,6 +31,7 @@ public class UIManager : MonoBehaviour
         //
 
         _player.EventAtDeath += EnableDeadScreen;
+        _player.EventAtCollect += UpdateCollectablesText;
 
         GodMode.onValueChanged.AddListener( (bool x) => { _player.SetGodMode(GodMode.isOn); });
 
@@ -53,7 +47,7 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        StaminaImage.fillAmount = _player.GetStamina / 100;
+        StaminaImage.fillAmount = _player.Stamina / 100;
 
         ExitScreen();
     }

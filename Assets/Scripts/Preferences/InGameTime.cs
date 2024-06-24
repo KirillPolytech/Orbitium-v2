@@ -24,7 +24,7 @@ public class InGameTime : MonoBehaviour
 
     private void Update()
     {
-        if (_player.GetPlayerState != Statements.Alive)
+        if (_player.PlayerState != Statements.Alive)
             return;
 
         _timeFloat += (decimal) Time.fixedDeltaTime;

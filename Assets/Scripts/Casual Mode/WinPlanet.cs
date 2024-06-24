@@ -7,18 +7,19 @@ public class WinPlanet : MonoBehaviour
 
     private MainPlayer _player;
     private Material _currentMaterial;
+
     private void Start()
     {
-        _player = MainPlayer.Instance.GetComponent<MainPlayer>();
+        //_player = MainPlayer.Instance.GetComponent<MainPlayer>();
 
         _currentMaterial = GetComponent<MeshRenderer>().material;
     }
+
     private void FixedUpdate()
     {
-        if (_player.GetCollectables != CollectablesManager.GetCountOfCollectables())
-            _currentMaterial = _deactiveMaterial;
-        else
-            _currentMaterial = _activeMaterial;
+        _currentMaterial = _player.Collectables != CollectablesManager.GetCountOfCollectables()
+            ? _deactiveMaterial
+            : _activeMaterial;
         GetComponent<MeshRenderer>().material = _currentMaterial;
     }
 }

@@ -31,24 +31,19 @@ namespace Web
         private PlayerService _playerService;
         private MainPlayer _mainPlayer;
         private InGameTime _timer;
-        private CanvasManager _menuWindowsController;
+        private MenuWindowsController _menuWindowsController;
         private WebUIController UI;
         private void Awake()
         {
-            Initializate();
-        }
-
-        private void OnLevelWasLoaded(int level)
-        {
-            Initializate();
-
-            OnLogged.AddListener( () => _menuWindowsController.OpenMenu("Statistic") );
-            OnRegistered.AddListener( () => _menuWindowsController.OpenMenu("Statistic") );
+            OnLogged.AddListener( () => _menuWindowsController.OpenWindow("Statistic") );
+            OnRegistered.AddListener( () => _menuWindowsController.OpenWindow("Statistic") );
 
             if (_mainPlayer != null)
             {
                 _mainPlayer.EventAtDeath = SendStatistic;
             }
+
+            Initializate();
         }
 
         private void Initializate()
@@ -62,10 +57,10 @@ namespace Web
                 Destroy(gameObject);
 
             _mainPlayer = FindAnyObjectByType<MainPlayer>();
-            _playerService = FindObjectOfType<PlayerService>();
-            _timer = FindObjectOfType<InGameTime>();
-            _menuWindowsController = FindObjectOfType<CanvasManager>();
-            UI = FindObjectOfType<WebUIController>();
+            _playerService = FindAnyObjectByType<PlayerService>();
+            _timer = FindAnyObjectByType<InGameTime>();
+            _menuWindowsController = FindAnyObjectByType<MenuWindowsController>();
+            UI = FindAnyObjectByType<WebUIController>();
         }
         // check
         public void Login(LoginData data)
@@ -127,7 +122,7 @@ namespace Web
         // check
         private void SendStatistic()
         {
-            if (playerToken == null || _playerService.GetPlayerData == null)
+            if (playerToken == null || _playerService.PlayerData == null)
             {
                 Debug.LogWarning("Empty data");   
                 return;
@@ -135,14 +130,14 @@ namespace Web
 
             var data = new PlayerData()
             {
-                Orbs = _mainPlayer.GetCollectables,
-                Nick = _playerService.GetPlayerData.Nick,
+                Orbs = _mainPlayer.Collectables,
+                Nick = _playerService.PlayerData.Nick,
                 Time = _timer.GetTime
             };
 
             _playerService.UpdateData(data);
 
-            StartCoroutine( UpdateStatisticRequest(playerToken, _playerService.GetPlayerData) );
+            StartCoroutine( UpdateStatisticRequest(playerToken, _playerService.PlayerData) );
         }
         // check
         private IEnumerator LoginRequest(LoginData data)
@@ -261,9 +256,9 @@ namespace Web
         // Check
         private IEnumerator BuyItemRequest(string name)
         {
-            string JsonData = JsonConvert.SerializeObject(name);
+            string jsonData = JsonConvert.SerializeObject(name);
 
-            www = UnityWebRequest.Post(GetItemDataURL, JsonData, "application/json");
+            www = UnityWebRequest.Post(GetItemDataURL, jsonData, "application/json");
             yield return www.SendWebRequest();
 
             if (www.error != null)
@@ -280,11 +275,7 @@ namespace Web
         private bool CheckString(string toCheck)
         {
             toCheck = toCheck.Trim();
-            if (toCheck.Length > 4 && toCheck.Length < 16)
-            {
-                return true;
-            }
-            return false;
+            return toCheck.Length is > 4 and < 16;
         }
     }
 }

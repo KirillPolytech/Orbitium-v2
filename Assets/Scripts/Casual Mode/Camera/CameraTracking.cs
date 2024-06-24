@@ -8,11 +8,12 @@ public class CameraTracking : MonoBehaviour
     [Range(5, 25)] [SerializeField] private int ScrollSpeed = 5;
     [Range(0.0f, 1f)] [SerializeField] private float ChaseVelocity = 0.1f;
 
-    private GameObject __playerObject;
+    private GameObject _playerObject;
     private float _isMouseScrolling;
+    
     private void Start()
     {
-        __playerObject = MainPlayer.Instance.gameObject;
+        _playerObject = FindAnyObjectByType<MainPlayer>().gameObject;
     }
 
     private void Update()
@@ -23,7 +24,7 @@ public class CameraTracking : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position = Vector3.Lerp(transform.position, 
-            new Vector3(__playerObject.transform.position.x, Mathf.Clamp(transform.position.y - _isMouseScrolling * ScrollForce, MinHeight, MaxHeight) , __playerObject.transform.position.z),
+            new Vector3(_playerObject.transform.position.x, Mathf.Clamp(transform.position.y - _isMouseScrolling * ScrollForce, MinHeight, MaxHeight) , _playerObject.transform.position.z),
             ChaseVelocity);
     }
 }

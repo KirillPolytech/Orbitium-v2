@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class LevelsStorage : MonoBehaviour
 {
+    private readonly char[] _integers = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+
     [SerializeField] private GameObject FirstLevel;
     [SerializeField] private GameObject FinalLevel;
     [SerializeField] private List<GameObject> LevelsPrefabs = new List<GameObject>();
 
     public static LevelsStorage Instance { get; private set; }
-    public GameObject GetFinalLevel { get { return FinalLevel; } }
+    public GameObject GetFinalLevel => FinalLevel;
 
-    private List<GameObject> _levels = new List<GameObject>();
-    private int _passedLevels = 0;
-    private char[] integers = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+    private readonly List<GameObject> _levels = new List<GameObject>();
+    private int _passedLevels;
+    
     public void Awake()
     {
         if (Instance == false)
@@ -23,16 +25,16 @@ public class LevelsStorage : MonoBehaviour
 
         _levels.Add(FirstLevel);
 
-        GameObject[] __levelsTemp = Resources.LoadAll<GameObject>("Levels");
-        GameObject[] __levelsTempCopy = new GameObject[__levelsTemp.Length];
+        GameObject[] levelsTemp = Resources.LoadAll<GameObject>("Levels");
+        GameObject[] levelsTempCopy = new GameObject[levelsTemp.Length];
 
-        __levelsTemp.CopyTo(__levelsTempCopy, 0);
+        levelsTemp.CopyTo(levelsTempCopy, 0);
 
-        for (int i = 0; i < __levelsTemp.Length; i++)
+        for (int i = 0; i < levelsTemp.Length; i++)
         {
-            __levelsTempCopy[i].name = ParseTextToInt(__levelsTemp[i].name);
+            levelsTempCopy[i].name = ParseTextToInt(levelsTemp[i].name);
 
-            LevelsPrefabs.Add(__levelsTempCopy[i]) ;
+            LevelsPrefabs.Add(levelsTempCopy[i]) ;
         }
         LevelsPrefabs = LevelsPrefabs.OrderByDescending(x => int.Parse(x.name) ).ToList();
         LevelsPrefabs.Reverse();
@@ -76,13 +78,13 @@ public class LevelsStorage : MonoBehaviour
     private string ParseTextToInt(string text)
     {
         string output = "";
-        for (int i = 0; i < text.Length; i++)
+        foreach (var t in text)
         {
-            for (int j = 0; j < integers.Length; j++)
+            foreach (var t1 in _integers)
             {
-                if (text[i] == integers[j])
+                if (t == t1)
                 {
-                    output += integers[j];                   
+                    output += t1;                   
                 }
             }
         }
@@ -93,6 +95,6 @@ public class LevelsStorage : MonoBehaviour
     {
         _passedLevels++;
 
-        UIManager.Instance.UpdatePassedLevelsCounter(_passedLevels);
+        //UIManager.Instance.UpdatePassedLevelsCounter(_passedLevels);
     }
 }

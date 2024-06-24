@@ -3,28 +3,31 @@ using UnityEngine;
 public class SetOrbit : MonoBehaviour
 {
     [SerializeField] float rotationSpeed = 0.02f;
-    private float currentRadian = 0f;
+    
+    private float currentRadian;
     private float x, z;
-    private float radius = 10f;
+    private float _radius = 10f;
     private Vector3 _center = Vector3.zero;
     private GameObject _player;
-    private ForceOnDrag _addForce;
-    const float RAD = 0.0174533f;
+    private DragMovement _addForce;
+
     private void Start()
     {
-        _addForce = MainPlayer.Instance.GetComponent<ForceOnDrag>();
+        //_addForce = MainPlayer.Instance.GetComponent<DragMovement>();
 
         _center = transform.parent.transform.position;
     }
+    
     private Vector3 SetOnOrbit()
     {
-        x = Mathf.Cos(currentRadian) * radius;
-        z = Mathf.Sin(currentRadian) * radius;
+        x = Mathf.Cos(currentRadian) * _radius;
+        z = Mathf.Sin(currentRadian) * _radius;
 
         currentRadian += rotationSpeed;
 
         return new Vector3(x, 0, z) + _center;
     }
+    
     private void OnTriggerStay(Collider other)
     {
         if (Input.GetKey(KeyCode.F) && other.CompareTag("Player"))
@@ -36,7 +39,7 @@ public class SetOrbit : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            radius = (other.transform.position - transform.parent.transform.position).magnitude;
+            _radius = (other.transform.position - transform.parent.transform.position).magnitude;
         }
         _addForce.enabled = true;
 

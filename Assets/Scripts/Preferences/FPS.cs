@@ -4,7 +4,7 @@ public class FPS : MonoBehaviour
 {
     private float deltaTime;
     private UIManager UI;
-    private void OnLevelWasLoaded(int level)
+    private void Awake()
     {
         UI = FindAnyObjectByType<UIManager>();
     }

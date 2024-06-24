@@ -58,27 +58,27 @@ namespace Web
             SendButtonRegister.onClick.AddListener(SendRegisterData);
 
             LeaderBoardButton.onClick.AddListener(_webManager.GetLeaderBoard);
-            shopButton.onClick.AddListener(() => { _webManager.GetItems(); _menuWindowsController.OpenMenu("Shop"); }) ;
+            shopButton.onClick.AddListener(() => { _webManager.GetItems(); _menuWindowsController.OpenWindow("Shop"); }) ;
 
             _webManager.OnError.AddListener(() => StartCoroutine(StartErrorTimer()));
 
             _webManager.OnLogged.AddListener(() => { 
                 OnlineButton.onClick.RemoveAllListeners();
-                OnlineButton.onClick.AddListener(() => _menuWindowsController.OpenMenu("Online(Logged)"));
-                _menuWindowsController.OpenMenu("Statistic");
+                OnlineButton.onClick.AddListener(() => _menuWindowsController.OpenWindow("Online(Logged)"));
+                _menuWindowsController.OpenWindow("Statistic");
                 });
 
             ErrorText.text = "";
 
             OnlineButton.onClick.RemoveAllListeners();
-            if (_playerService.GetStatus == PlayerStatus.logged)
+            if (_playerService.Status == PlayerStatus.logged)
             {
-                OnlineButton.onClick.AddListener(() => { _menuWindowsController.OpenMenu("Online(Logged)"); SetPlayerData(_playerService.GetPlayerData); });
+                OnlineButton.onClick.AddListener(() => { _menuWindowsController.OpenWindow("Online(Logged)"); SetPlayerData(_playerService.PlayerData); });
             }
             else
             {
                 SendLoginButton.onClick.AddListener(() => { SendLoginData(); });
-                OnlineButton.onClick.AddListener(() => _menuWindowsController.OpenMenu("Online(Anonyme)"));
+                OnlineButton.onClick.AddListener(() => _menuWindowsController.OpenWindow("Online(Anonyme)"));
             }
         }
 

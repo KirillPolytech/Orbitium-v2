@@ -3,32 +3,25 @@ using UnityEngine;
 
 public class MainPlayer : MonoBehaviour
 {
-    public static MainPlayer Instance { get; private set; }
     public Action EventAtDeath;
+    public Action<int> EventAtCollect;
 
     [Range(0f,100)] [SerializeField] private float defaultStaminaValue = 100;
     [Range(0f, 100)] [SerializeField] private float stamina = 100;
     [Range(0f, 1f)] [SerializeField] private float Regen = 0.5f; // 0.5f
     [Range(0f, 1f)] [SerializeField] private float WasteStam = 0.75f; // 0.75f
-    [SerializeField] private int Collectables = 0;
 
     [SerializeField] private ParticleSystem _newDeathSystem;
 
-    public int GetCollectables  => Collectables;
-    public float GetStamina => stamina;
-    public Statements GetPlayerState => _playerState;
+    public int Collectables { get; private set; }
+    public float Stamina => stamina;
+    public Statements PlayerState { get; private set; } = Statements.Alive;
 
-    private Statements _playerState = Statements.Alive;
     private Rigidbody _rb;
     private AudioSource _hitSound;
     private Renderer _renderer;
-    public void Initialize()
+    public void Awake()
     {
-        if (Instance == null)
-            Instance = this; 
-        else 
-            Destroy(gameObject);
-
         _rb = GetComponent<Rigidbody>();
         _renderer = GetComponent<Renderer>();
         _hitSound = GetComponent<AudioSource>();
@@ -51,7 +44,7 @@ public class MainPlayer : MonoBehaviour
 
     public void WasteStamina()
     {
-        if (_playerState != Statements.God)
+        if (PlayerState != Statements.God)
             stamina = Mathf.Clamp(stamina - WasteStam, 0f, 100f);
     }
 
@@ -62,13 +55,9 @@ public class MainPlayer : MonoBehaviour
 
     public void SetGodMode(bool state)
     {
-        if (state)
-            _playerState = Statements.God;
+        PlayerState = state ? Statements.God : Statements.Alive;
 
-        else
-            _playerState = Statements.Alive;
-
-        Debug.Log("godmode updated: " + _playerState + " " + state);
+        Debug.Log("god mode updated: " + PlayerState + " " + state);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -79,24 +68,22 @@ public class MainPlayer : MonoBehaviour
         }
 
         PlayHitSound();
-        if (_playerState != Statements.God)
+        if (PlayerState != Statements.God)
         {
             if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Enemy"))
             {
-                _playerState = Statements.Dead;
+                PlayerState = Statements.Dead;
             }
         }
 
-        if (_playerState == Statements.Dead)
-        {
-            _rb.constraints = RigidbodyConstraints.FreezeAll;
-            _renderer.enabled = false;
-            _newDeathSystem.Play();
+        if (PlayerState != Statements.Dead) 
+            return;
+        
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+        _renderer.enabled = false;
+        _newDeathSystem.Play();
 
-            EventAtDeath.Invoke();
-
-            UIManager.Instance.EnableDeadScreen();
-        }
+        EventAtDeath.Invoke();
     }
 
     private void PlayHitSound()
@@ -106,14 +93,12 @@ public class MainPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Collectables") == false)
+        if (!other.gameObject.CompareTag("Collectables"))
             return;
-
-        Collectables++;
 
         stamina = Mathf.Clamp(stamina + other.gameObject.GetComponent<CollectableSphereInfinity>().GetValuable, 0, 100);
 
-        UIManager.Instance.UpdateCollectablesText(Collectables);
+        EventAtCollect?.Invoke(++Collectables);
     }
 }
 public enum Statements

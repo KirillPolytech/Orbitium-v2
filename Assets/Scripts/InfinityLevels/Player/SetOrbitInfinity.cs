@@ -8,12 +8,12 @@ public class SetOrbitInfinity : MonoBehaviour
     private float radius = 10f;
     private Vector3 _center = Vector3.zero;
     private GameObject _player;
-    private ForceOnDrag _addForce;
+    private DragMovement _addForce;
     const float RAD = 0.0174533f;
     private void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
-        _addForce = _player.GetComponent<ForceOnDrag>();
+        _addForce = _player.GetComponent<DragMovement>();
 
         _center = transform.parent.transform.position;
     }

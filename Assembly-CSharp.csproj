@@ -48,9 +48,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BlackScreen.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Music\MusicManager.cs" />
+    <Compile Include="Assets\Scripts\TagStorage.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\LevelCreator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+    <Compile Include="Assets\Scripts\InfinityLevels\Planets\StaticPlanet.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Enemies\PassiveEnemy.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\CollectablesCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
@@ -66,6 +68,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\CollectableSphereInfinity.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\WinPlanet.cs" />
+    <Compile Include="Assets\Scripts\Casual Mode\Mechanics\GravityCalculation.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Enemies\SpawnEnemies.cs" />
     <Compile Include="Assets\Scripts\Menu\LoggedCanvas.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
@@ -100,10 +103,10 @@
     <Compile Include="Assets\Scripts\Preferences\FPS.cs" />
     <Compile Include="Assets\Scripts\SO\StorySO.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\FenceRotation.cs" />
-    <Compile Include="Assets\Scripts\Casual Mode\StaticPlanet.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Ui\LevelsData.cs" />
     <Compile Include="Assets\Scripts\WebLogic\PlayerService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+    <Compile Include="Assets\Scripts\InfinityLevels\Player\DragMovement.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\CollisionWithSun.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Collectable\CollectablesManager.cs" />
@@ -156,10 +159,8 @@
     <Compile Include="Assets\Scripts\Casual Mode\Ui\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\UIManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-    <Compile Include="Assets\Scripts\InfinityLevels\Planets\StaticPlanetInfinity.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Levels\RestartButton.cs" />
     <Compile Include="Assets\Scripts\Time\TimeManagement.cs" />
-    <Compile Include="Assets\Scripts\InfinityLevels\Player\ForceOnDrag.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\Planets\EnemyInfinity.cs" />
     <Compile Include="Assets\Scripts\WebLogic\Contracts\PlayerData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />

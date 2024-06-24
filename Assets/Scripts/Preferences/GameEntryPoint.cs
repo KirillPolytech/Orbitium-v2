@@ -1,20 +1,20 @@
 using UnityEngine;
 
-public class GameEntryPoint : MonoBehaviour
+public class GameEntryPoint
 {
-    private MainPlayer _player;
-    private UIManager _ui;
-    private ForceOnDrag _onDrag;
-    private void Awake()
+    private static GameEntryPoint _instance;
+    
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AutoStartGame()
     {
         Preferences.Initialize();
 
-        _player = FindObjectOfType<MainPlayer>();
-        _ui = FindObjectOfType<UIManager>();
-        _onDrag = FindObjectOfType<ForceOnDrag>();
+        _instance = new GameEntryPoint();
+        _instance.Initialize();
+    }
 
-        _player.Initialize();
-        _ui.Initialize();
-        _onDrag.Initialize();
+    private void Initialize()
+    {
+        
     }
 }
