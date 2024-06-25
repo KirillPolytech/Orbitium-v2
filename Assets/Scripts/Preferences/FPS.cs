@@ -11,6 +11,6 @@ public class FPS : MonoBehaviour
 
     private void FPSCounter()
     {
-        DeltaTime = (int)(1f / Time.unscaledDeltaTime); //+= (Time.deltaTime - DeltaTime) * 0.1f;
+        DeltaTime = (int)(1f / Time.unscaledDeltaTime);
     }
 }

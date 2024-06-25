@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MainPlayer : MonoBehaviour
+public class MainPlayer : MonoBehaviour, IStateConfigurator
 {
     public Action EventAtDeath;
     public Action<int> EventAtCollect;
@@ -70,7 +70,7 @@ public class MainPlayer : MonoBehaviour
         PlayHitSound();
         if (PlayerState != Statements.God)
         {
-            if (collision.collider.CompareTag("Wall") || collision.collider.CompareTag("Enemy"))
+            if (collision.collider.CompareTag(TagStorage.Wall) || collision.collider.CompareTag(TagStorage.Enemy))
             {
                 PlayerState = Statements.Dead;
             }
@@ -100,8 +100,14 @@ public class MainPlayer : MonoBehaviour
 
         EventAtCollect?.Invoke(++Collectables);
     }
-}
-public enum Statements
-{
-    Dead, Alive, God, Playing
+
+    public void SetState(bool state)
+    {
+        
+    }
+
+    public void Reset()
+    {
+        
+    }
 }

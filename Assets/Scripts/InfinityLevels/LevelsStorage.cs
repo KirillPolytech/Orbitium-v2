@@ -52,16 +52,16 @@ public class LevelsStorage : MonoBehaviour
         {
             if (!_levels[index])
             {
-                Debug.Log("Level doesnt exist");
+                Debug.LogWarning("Level doesnt exist");
                 return;
             }
-            GameObject __temp = _levels[index];
-            Debug.Log("Destroyed name: " + __temp.name + " index: " + index);
-            Destroy(__temp);
+            GameObject temp = _levels[index];
+            Debug.Log("Destroyed name: " + temp.name + " index: " + index);
+            Destroy(temp);
         }
         else
         {
-            Debug.Log("index out of range. Index: " + index + "\nLevels count: " + _levels.Count);
+            Debug.LogWarning("index out of range. Index: " + index + "\nLevels count: " + _levels.Count);
         }
     }
 

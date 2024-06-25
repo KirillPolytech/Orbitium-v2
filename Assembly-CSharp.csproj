@@ -52,8 +52,10 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\LevelCreator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\Abstract\State.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\Planets\StaticPlanet.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Enemies\PassiveEnemy.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\InGameStateMachine\PauseState.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\CollectablesCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Music\PlayClick.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Preferences\InGameTime.cs" />
+    <Compile Include="Assets\Scripts\Preferences\TimeManagement.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\CircleSpawnObjects.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\MovingTexture.cs" />
@@ -99,6 +102,7 @@
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Score.cs" />
     <Compile Include="Assets\Scripts\WindowController\MenuWindowsController.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Rotation\RotateAround.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\InGameStateMachine\InGameStateMachine.cs" />
     <Compile Include="Assets\Scripts\GlobalVariables.cs" />
     <Compile Include="Assets\Scripts\Preferences\FPS.cs" />
     <Compile Include="Assets\Scripts\SO\StorySO.cs" />
@@ -117,6 +121,7 @@
     <Compile Include="Assets\Scripts\Casual Mode\Collectable\CollectableSphere.cs" />
     <Compile Include="Assets\Scripts\WebLogic\Contracts\ItemData.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Rotation\SetAroundAndRadiusDeacrease.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\InGameStateMachine\ActiveState.cs" />
     <Compile Include="Assets\Scripts\WebLogic\Contracts\LoginData.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\LevelSpawner.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\LevelsStorage.cs" />
@@ -146,6 +151,7 @@
     <Compile Include="Assets\Scripts\Casual Mode\Levels\RestartLevel.cs" />
     <Compile Include="Assets\Scripts\WebLogic\LeaderBoardData.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Rotation\RotationAroundCenter.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\Abstract\IStateConfigurator.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\Rotation\SetArounCircleY.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\ClusterRotatioAroundCenter.cs" />
@@ -159,9 +165,10 @@
     <Compile Include="Assets\Scripts\InfinityLevels\Planets\FriendInfinity.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Ui\LevelsManager.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\UIManager.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\Statements.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-    <Compile Include="Assets\Scripts\Casual Mode\Levels\RestartButton.cs" />
-    <Compile Include="Assets\Scripts\Time\TimeManagement.cs" />
+    <Compile Include="Assets\Scripts\StateMachine\Abstract\StateMachine.cs" />
+    <Compile Include="Assets\Scripts\Preferences\GamePlayEntryPoint.cs" />
     <Compile Include="Assets\Scripts\InfinityLevels\Planets\EnemyInfinity.cs" />
     <Compile Include="Assets\Scripts\WebLogic\Contracts\PlayerData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />

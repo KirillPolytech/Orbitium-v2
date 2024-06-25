@@ -28,7 +28,7 @@ public class StaticPlanet : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (!other.gameObject.CompareTag(TagStorage.PlayerTag)) 
+        if (!other.gameObject.CompareTag(TagStorage.Player)) 
             return;
 
         Vector3 gravityDirection = GravityCalculation.CalculateGravity(_rb, other.GetComponent<Rigidbody>(), _gravity.GravityConstant );
@@ -38,7 +38,7 @@ public class StaticPlanet : MonoBehaviour
     
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.CompareTag(TagStorage.PlayerTag))
+        if (!other.gameObject.CompareTag(TagStorage.Player))
             return;
         
         Vector3 gravityDirection = GravityCalculation.CalculateGravity(_rb, other.GetComponent<Rigidbody>(), _gravity.GravityConstant );

@@ -16,14 +16,15 @@ namespace Web
 
         private string LoginURL = "https://localhost:7245/api/User/Login";
         private string RegisterURL = "https://localhost:7245/RegisterUser";
-        private string DeleteUserURL = "https://localhost:7245/DeleteUser";
+        //private string DeleteUserURL = "https://localhost:7245/DeleteUser";
 
         private string UpdateStatisticURL = "https://localhost:7245/UpdateStatistic";
         private string GetLeaderBoardsURL = "https://localhost:7245/GetLeaderBoards";
         private string GetPlayerDataURL = "https://localhost:7245/GetPlayerData";
+
         private string GetItemDataURL = "https://localhost:7245/GetItemsData";
-        private string BuyItemURL = "https://localhost:7245/BuyItem";
-        private string SetRecordURL = "https://localhost:7245/SetRecord";
+        //private string BuyItemURL = "https://localhost:7245/BuyItem";
+        //private string SetRecordURL = "https://localhost:7245/SetRecord";
 
         private JwtToken playerToken;
         private UnityWebRequest www;
@@ -33,10 +34,11 @@ namespace Web
         private InGameTime _timer;
         private MenuWindowsController _menuWindowsController;
         private WebUIController UI;
+
         private void Awake()
         {
-            OnLogged.AddListener( () => _menuWindowsController.OpenWindow("Statistic") );
-            OnRegistered.AddListener( () => _menuWindowsController.OpenWindow("Statistic") );
+            OnLogged.AddListener(() => _menuWindowsController.OpenWindow("Statistic"));
+            OnRegistered.AddListener(() => _menuWindowsController.OpenWindow("Statistic"));
 
             if (_mainPlayer != null)
             {
@@ -62,6 +64,7 @@ namespace Web
             _menuWindowsController = FindAnyObjectByType<MenuWindowsController>();
             UI = FindAnyObjectByType<WebUIController>();
         }
+
         // check
         public void Login(LoginData data)
         {
@@ -72,32 +75,36 @@ namespace Web
 
             if (CheckString(data.login) && CheckString(data.password))
             {
-                StartCoroutine(LoginRequest(data) );
+                StartCoroutine(LoginRequest(data));
                 return;
             }
 
             OnError.Invoke();
         }
+
         // check
         public void Registration(string login, string password, string password2, string nickname)
         {
             StopAllCoroutines();
 
             if (CheckString(login) && CheckString(nickname) &&
-                CheckString(password) && 
+                CheckString(password) &&
                 CheckString(password2) &&
                 password == password2)
             {
-                StartCoroutine( RegistrationRequest(new RegisterData() 
-                { Login = login, 
-                    Password = password, Nick = 
-                    nickname, 
-                    Create_time = DateTime.Now} ) );
+                StartCoroutine(RegistrationRequest(new RegisterData()
+                {
+                    Login = login,
+                    Password = password, Nick =
+                        nickname,
+                    Create_time = DateTime.Now
+                }));
                 return;
             }
 
             OnError.Invoke();
         }
+
         // check
         public void GetLeaderBoard()
         {
@@ -105,6 +112,7 @@ namespace Web
 
             StartCoroutine(GetLeaderBoardRequest());
         }
+
         // check
         public void GetItems()
         {
@@ -112,6 +120,7 @@ namespace Web
 
             StartCoroutine(GetItemDataRequest());
         }
+
         // check
         public void BuyItem(string name)
         {
@@ -119,12 +128,13 @@ namespace Web
 
             StartCoroutine(BuyItemRequest(name));
         }
+
         // check
         private void SendStatistic()
         {
             if (playerToken == null || _playerService.PlayerData == null)
             {
-                Debug.LogWarning("Empty data");   
+                Debug.LogWarning("Empty data");
                 return;
             }
 
@@ -137,8 +147,9 @@ namespace Web
 
             _playerService.UpdateData(data);
 
-            StartCoroutine( UpdateStatisticRequest(playerToken, _playerService.PlayerData) );
+            StartCoroutine(UpdateStatisticRequest(playerToken, _playerService.PlayerData));
         }
+
         // check
         private IEnumerator LoginRequest(LoginData data)
         {
@@ -157,6 +168,7 @@ namespace Web
 
             StartCoroutine(GetPlayerDataRequest(playerToken));
         }
+
         // check
         private IEnumerator RegistrationRequest(RegisterData data)
         {
@@ -176,6 +188,7 @@ namespace Web
 
             StartCoroutine(GetPlayerDataRequest(playerToken));
         }
+
         // check
         private IEnumerator GetPlayerDataRequest(JwtToken jwtToken)
         {
@@ -197,6 +210,7 @@ namespace Web
 
             Debug.Log(data.Orbs + " " + data.Nick);
         }
+
         // check
         private IEnumerator UpdateStatisticRequest(JwtToken jwtToken, PlayerData data)
         {
@@ -215,6 +229,7 @@ namespace Web
 
             yield return null;
         }
+
         // check
         private IEnumerator GetLeaderBoardRequest()
         {
@@ -228,12 +243,13 @@ namespace Web
                 yield break;
             }
 
-            List< LeaderBoardData> data = JsonConvert.DeserializeObject<List<LeaderBoardData>>(www.downloadHandler.text);
+            List<LeaderBoardData> data = JsonConvert.DeserializeObject<List<LeaderBoardData>>(www.downloadHandler.text);
 
             UI.DisplayRecords(data);
 
             yield return null;
         }
+
         // check
         private IEnumerator GetItemDataRequest()
         {
@@ -253,6 +269,7 @@ namespace Web
 
             yield return null;
         }
+
         // Check
         private IEnumerator BuyItemRequest(string name)
         {
