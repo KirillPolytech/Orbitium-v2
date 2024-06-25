@@ -6,29 +6,33 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Material _destroyMaterial;
     [SerializeField] private int _interval = 50;
 
-    private Rigidbody Rb;
-    private GameObject Player;
-    private Vector3 Direction;
-    private int _timer = 0;
+    private Rigidbody _rb;
+    private GameObject _player;
+    private Vector3 _direction;
+    private int _timer;
+
     private void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
 
-        Rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Direction = (Player.transform.position - transform.position).normalized;
+            _direction = (_player.transform.position - transform.position).normalized;
             if (_timer > _interval)
             {
-                Rb.AddForce(Direction * Force, ForceMode.Impulse);
+                _rb.AddForce(_direction * Force, ForceMode.Impulse);
                 _timer = 0;
             }
+
             _timer++;
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
