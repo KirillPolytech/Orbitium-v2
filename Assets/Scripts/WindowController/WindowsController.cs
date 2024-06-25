@@ -37,7 +37,7 @@ public abstract class WindowsController : MonoBehaviour
             m.Close();
 
         window.Open();
-        Debug.Log($"Window: Open {window.WindowName}");
+        Debug.Log($"Window open: {window.WindowName}");
     }
 
     public void OpenWindow(Window window)
@@ -47,7 +47,7 @@ public abstract class WindowsController : MonoBehaviour
         
         window.Open();
         
-        Debug.Log($"Window: Open {window.WindowName}");
+        Debug.Log($"Window open: {window.WindowName}");
     }
 
     public void CloseCurrent()

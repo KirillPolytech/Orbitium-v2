@@ -8,13 +8,13 @@ public class GameEntryPoint
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void AutoStartGame()
     {
-        Preferences.Initialize();
-
         Instance = new GameEntryPoint();
     }
 
-    private void Initialize()
+    public void Initialize()
     {
+        Preferences.Initialize();
+        
         InGameStateMachine inGameStateMachine = new InGameStateMachine();
         inGameStateMachine.Initialize();
     }
