@@ -35,20 +35,3 @@ public class Score : MonoBehaviour
         }
     }
 }
-
-
-            /*
-        public static void AddScore(int value)
-        if (_scores.Count < index && index != -1)
-            _scores.Add(value);
-        else if (value < _scores[index])
-            _scores[index] = value;
-    }
-    public static int GetScore(int index)
-    {
-        if (_scores.Count < index - 2) // 0 
-            return 0;
-        else
-            return _scores[index];
-    }
-        */

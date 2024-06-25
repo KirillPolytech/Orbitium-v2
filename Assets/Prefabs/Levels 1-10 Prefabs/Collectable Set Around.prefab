@@ -14,13 +14,14 @@ GameObject:
   - component: {fileID: 5546358271145839463}
   - component: {fileID: 5546358271145839461}
   - component: {fileID: 2923167208571302172}
+  - component: {fileID: 4165881688759826808}
   - component: {fileID: 8887474026084905491}
   m_Layer: 3
-  m_Name: Collectable (Infinity)
+  m_Name: Collectable Set Around
   m_TagString: Collectables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5546358271145839466
 Transform:
@@ -220,6 +221,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4165881688759826808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546358271145839460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc90bcc399289de4ba02f09cc5ca2f00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 0}
+  ObjectsCount: 36
+  Radius: 10
+  Center: {fileID: 0}
 --- !u!114 &8887474026084905491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +267,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3322374656715845497
 Transform:
@@ -5077,7 +5094,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &9058271227975258507
 Transform:

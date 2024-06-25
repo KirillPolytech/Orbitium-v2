@@ -2,16 +2,19 @@ using UnityEngine;
 
 public class CircleChild : MonoBehaviour
 {
-    private CircleRotation __circleRotation;
+    private CircleRotation _circleRotation;
+    
     private void Awake()
     {
-        __circleRotation = transform.parent.GetComponent<CircleRotation>();
+        _circleRotation = transform.parent.GetComponent<CircleRotation>();
     }
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Destroyable"))
+        if (collision.gameObject.CompareTag(TagStorage.Destroyable))
             return;
-        __circleRotation.StopRotation();
+        
+        _circleRotation.StopRotation();
         Destroy(this);
     }
 }

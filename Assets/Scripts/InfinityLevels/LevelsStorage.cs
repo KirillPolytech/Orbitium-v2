@@ -10,19 +10,16 @@ public class LevelsStorage : MonoBehaviour
     [SerializeField] private GameObject FinalLevel;
     [SerializeField] private List<GameObject> LevelsPrefabs = new List<GameObject>();
 
-    public static LevelsStorage Instance { get; private set; }
     public GameObject GetFinalLevel => FinalLevel;
 
     private readonly List<GameObject> _levels = new List<GameObject>();
     private int _passedLevels;
+    private InGameUI _gameUI;
     
     public void Awake()
     {
-        if (Instance == false)
-            Instance = this;
-        else 
-            Destroy(gameObject);
-
+        _gameUI = FindAnyObjectByType<InGameUI>();
+        
         _levels.Add(FirstLevel);
 
         GameObject[] levelsTemp = Resources.LoadAll<GameObject>("Levels");
@@ -42,7 +39,7 @@ public class LevelsStorage : MonoBehaviour
 
     public void AddLevelToList(GameObject level)
     {
-        _levels.Add( level);
+        _levels.Add(level);
         //Debug.Log("Levels count: " + __levels.Count);
     }
 
@@ -93,8 +90,6 @@ public class LevelsStorage : MonoBehaviour
 
     public void IncreasePassedLevels()
     {
-        _passedLevels++;
-
-        //UIManager.Instance.UpdatePassedLevelsCounter(_passedLevels);
+        _gameUI.UpdatePassedLevelsCounter(++_passedLevels);
     }
 }

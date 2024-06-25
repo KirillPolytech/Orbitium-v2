@@ -2,7 +2,7 @@ using UnityEngine;
 
 public static class GravityCalculation
 {
-    private const int CriticalDistance = 1;
+    private const int CriticalDistance = 5;
 
     public static Vector3 CalculateGravity(Rigidbody current, Rigidbody other, float gravitationConstant)
     {
@@ -33,7 +33,11 @@ public static class GravityCalculation
         Vector3 dirToOther = vectorToOther.normalized;
 
         float currentMass = current.mass;
-        float otherMass = other.mass;
+        float otherMass;
+        if (other)
+            otherMass = other.mass;
+        else
+            otherMass = 0;
 
         float gravity;
         // F = G * (m1*m2) / R^2 (Gravity).

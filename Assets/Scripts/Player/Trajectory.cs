@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class Trajectory : MonoBehaviour
 {
-    private const int PointsCout = 100;
-    private const float LineWidth = 0.3f;
+    private const int PointsCout = 360;
+    private const float LineWidth = 0.1f;
+    private float _deltaTime;
 
     [SerializeField] private Material lineMaterial;
     
@@ -11,6 +12,8 @@ public class Trajectory : MonoBehaviour
 
     private void Start()
     {
+        _deltaTime = Time.fixedDeltaTime;
+        
         GameObject lineRenderComponent = new GameObject();
         _lineRenderComponent = lineRenderComponent.AddComponent<LineRenderer>();
 
@@ -32,8 +35,8 @@ public class Trajectory : MonoBehaviour
         {
             Vector3 tempPos2 = tempPos;
             tempPos += (tempVelocity + GravityCalculation.CalculateGravity(current, other, tempPos, otherPos, gravityConst)) 
-                       * Time.fixedDeltaTime;
-            tempVelocity = (tempPos - tempPos2) / Time.fixedDeltaTime;
+                       * _deltaTime;
+            tempVelocity = (tempPos - tempPos2) / _deltaTime;
             points[i] = tempPos;
         }
 

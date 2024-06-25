@@ -11,8 +11,8 @@ public class MovementDirectionLine : MonoBehaviour
         _mainPlayer = GetComponent<MainPlayer>();
         
         Line.useWorldSpace = true;
-        Line.startWidth = 1f;
-        Line.endWidth = 0.3f;
+        Line.startWidth = 0.1f;
+        Line.endWidth = 0.1f;
 
         _mainPlayer.EventAtDeath += ResetLinePosition;
     }

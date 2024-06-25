@@ -2,17 +2,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class InGameUI : MonoBehaviour
 {
-    [Header("Texts")]
-    [SerializeField] private TextMeshProUGUI LevelPassed;
+    [Header("Texts")] [SerializeField] private TextMeshProUGUI LevelPassed;
     [SerializeField] private TextMeshProUGUI TimeText;
     [SerializeField] private TextMeshProUGUI FPS;
     [SerializeField] private TextMeshProUGUI CollectablesText;
-    [Header("Images")]
-    [SerializeField] private Image StaminaImage;
-    [Header("Toggles")]
-    [SerializeField] private Toggle godMode;
+    [Header("Images")] [SerializeField] private Image StaminaImage;
+    [Header("Toggles")] [SerializeField] private Toggle godMode;
 
     private FPS _fps;
     private InGameTime _inGameTime;
@@ -20,8 +17,9 @@ public class UIManager : MonoBehaviour
     private StaminaController _staminaController;
     private InGameWindowsController _inGameWindowsController;
     private GamePlayEntryPoint _gamePlayEntryPoint;
+    private BlackScreen _blackScreen;
     private bool _isPauseButtonDown;
-    
+
     public void Awake()
     {
         _player = FindAnyObjectByType<MainPlayer>();
@@ -30,14 +28,15 @@ public class UIManager : MonoBehaviour
         _inGameTime = FindAnyObjectByType<InGameTime>();
         _inGameWindowsController = FindAnyObjectByType<InGameWindowsController>();
         _gamePlayEntryPoint = FindAnyObjectByType<GamePlayEntryPoint>();
+        _blackScreen = FindAnyObjectByType<BlackScreen>();
 
         TimeText.text = "0.0";
 
         _player.EventAtDeath += () => _inGameWindowsController.OpenWindow(_inGameWindowsController.GameOver);
-        
+
         _player.EventAtCollect += UpdateCollectablesText;
 
-        godMode.onValueChanged.AddListener( _ => { _player.SetGodMode(godMode.isOn); });
+        godMode.onValueChanged.AddListener(_ => { _player.SetGodMode(godMode.isOn); });
 
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -46,7 +45,12 @@ public class UIManager : MonoBehaviour
                 YandexIntegration.Instance.SendDataToLeaderBoard(_timeFloat, MainPlayer.Instance.GetCollectables);
             };
 #endif
+    }
 
+    private void Start()
+    {
+        _blackScreen.SetColor(new Color(0, 0, 0, 1));
+        _blackScreen.Disable();
     }
 
     private void Update()
@@ -102,6 +106,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdatePassedLevelsCounter(int num)
     {
-        LevelPassed.text = "Level: " + num;
+        LevelPassed.text = $"Level: {num}";
     }
 }

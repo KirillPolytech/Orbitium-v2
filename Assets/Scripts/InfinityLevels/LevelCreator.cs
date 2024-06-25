@@ -2,24 +2,34 @@ using UnityEngine;
 
 public class LevelCreator : MonoBehaviour
 {
+    private LevelsStorage _levelsStorage;
+    private LevelSpawner _levelSpawner;
+    
+    public void Awake()
+    {
+        _levelsStorage = FindAnyObjectByType<LevelsStorage>();
+        _levelSpawner = FindAnyObjectByType<LevelSpawner>();
+    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") == false)
+        if (!other.CompareTag(TagStorage.Player))
             return;
 
-        LevelSpawner.Instance.SpawnLevel();
+        _levelSpawner.SpawnLevel();
     }
+    
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") == false)
+        if (!other.CompareTag(TagStorage.Player))
             return;
 
         GetComponent<MeshRenderer>().enabled = true;
         GetComponent<BoxCollider>().isTrigger = false;
 
-        LevelSpawner.Instance.DeleteLevel();
+        _levelSpawner.DeleteLevel();
 
-        LevelsStorage.Instance.IncreasePassedLevels();
+        _levelsStorage.IncreasePassedLevels();
 
         Destroy(this);
     }

@@ -4,4 +4,5 @@ public static class TagStorage
     public const string Wall = "Wall";
     public const string Enemy = "Enemy";
     public const string Friend = "Friend";
+    public const string Destroyable = "Destroyable";
 }

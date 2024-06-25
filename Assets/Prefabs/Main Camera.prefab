@@ -215,8 +215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6764b10c75023b4fb6b81e7e9875daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ScrollForce: 5
-  MaxHeight: 50
-  MinHeight: 15
-  ScrollSpeed: 5
-  ChaseVelocity: 0.1
+  scrollForce: 5
+  maxHeight: 50
+  minHeight: 15
+  scrollSpeed: 20
+  chaseVelocity: 0.1
