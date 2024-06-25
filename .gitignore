@@ -5273,3 +5273,5 @@ Library/SceneVisibilityState.asset
 Library/BurstCache/JIT/BurstCacheManifest.cm
 Library/Bee/TundraBuildState.state.map
 Temp/FSTimeGet-f18a96b50e23116439e8ff3fb36d59f2
+/Library
+/Temp
