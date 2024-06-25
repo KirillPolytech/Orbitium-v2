@@ -15,7 +15,7 @@ public class InGameStateMachine : StateMachine
     {
         _inGameTime = Object.FindAnyObjectByType<InGameTime>();
         _mainPlayer = Object.FindAnyObjectByType<MainPlayer>();
-        _dragMovement = Object.FindAnyObjectByType<DragMovement>();
+        _dragMovement = _mainPlayer.GetComponent<DragMovement>();
         _inGameWindowsController = Object.FindAnyObjectByType<InGameWindowsController>();
 
         List<IStateConfigurator> iStateConfigurator = new List<IStateConfigurator>

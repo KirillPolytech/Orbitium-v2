@@ -10,18 +10,17 @@ public class GameEntryPoint
     {
         Instance = new GameEntryPoint();
     }
+    
+    public static void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
 
-    public void Initialize()
+    public static void Initialize()
     {
         Preferences.Initialize();
         
         InGameStateMachine inGameStateMachine = new InGameStateMachine();
         inGameStateMachine.Initialize();
-    }
-
-    public void LoadScene(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-        Instance.Initialize();
     }
 }

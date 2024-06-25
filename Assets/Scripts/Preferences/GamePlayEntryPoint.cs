@@ -5,11 +5,11 @@ public class GamePlayEntryPoint : MonoBehaviour
 {
     private void Awake()
     {
-        GameEntryPoint.Instance.Initialize();
+        GameEntryPoint.Initialize();
     }
 
     public void RestartScene()
     {
-        GameEntryPoint.Instance.LoadScene(SceneManager.GetActiveScene().name);
+        GameEntryPoint.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
