@@ -6,8 +6,6 @@ public class Gravitation : MonoBehaviour
     [SerializeField] private LineRenderer circleRenderer;
     [Range(36, 72)] [SerializeField] private int steps = 36;
 
-    public float GravityConstant => GravitationConstant;
-
     private Rigidbody _rb;
     private SphereCollider _sphereCollider;
 
@@ -25,7 +23,13 @@ public class Gravitation : MonoBehaviour
         if (!otherRb)
             return;
 
-        otherRb.AddForce(GravityCalculation.CalculateGravity(_rb, otherRb, GravitationConstant), ForceMode.Impulse);
+        Vector3 gravityDirection = GravityCalculation.CalculateGravity(_rb, otherRb, GravitationConstant);
+        otherRb.velocity += gravityDirection;
+
+        if (!other.gameObject.CompareTag(TagStorage.Player))
+            return;
+        
+        other.GetComponent<DragMovement>().SetGravityDirection(gravityDirection, _rb, GravitationConstant);
     }
 
     private void FixedUpdate()

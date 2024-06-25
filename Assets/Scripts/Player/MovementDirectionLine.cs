@@ -26,8 +26,6 @@ public class MovementDirectionLine : MonoBehaviour
 
     public void ResetLinePosition()
     {
-        //Line.SetPosition(0, new Vector3(-50, -50, -50));
-        //Line.SetPosition(1, new Vector3(-50, -50, -50));
         Line.enabled = false;
     }
 }
