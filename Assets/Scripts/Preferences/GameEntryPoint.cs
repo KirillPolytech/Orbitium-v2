@@ -16,11 +16,8 @@ public class GameEntryPoint
         SceneManager.LoadScene(sceneName);
     }
 
-    public static void Initialize()
+    public void Initialize()
     {
         Preferences.Initialize();
-        
-        InGameStateMachine inGameStateMachine = new InGameStateMachine();
-        inGameStateMachine.Initialize();
     }
 }

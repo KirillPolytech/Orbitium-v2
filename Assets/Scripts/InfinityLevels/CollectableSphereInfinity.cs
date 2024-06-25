@@ -8,11 +8,12 @@ public class CollectableSphereInfinity : MonoBehaviour
     [SerializeField] private int valuable = 10;
     [SerializeField] private ParticleSystem _CollectEffect;
     //[SerializeField] private float _fadeSpeed = 0.18f;
-    private float _fadeSpeed = 1f; // 0.9f
-    public int GetValuable { get { return valuable; } }
+    public int GetValuable => valuable;
 
     private AudioSource _sound;
     private SphereCollider _sphereCollider;
+    private float _fadeSpeed = 1f; // 0.9f
+
     private void Awake()
     {
         _sound = GetComponent<AudioSource>();
@@ -20,17 +21,17 @@ public class CollectableSphereInfinity : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            SendScore();
-            PlaySound();
-            _CollectEffect.transform.position = transform.position;
-            _CollectEffect.Play();
-            _sphereCollider.enabled = false;
-            StartCoroutine(Fade());
+        if (!other.gameObject.CompareTag("Player")) 
+            return;
+        
+        SendScore();
+        PlaySound();
+        _CollectEffect.transform.position = transform.position;
+        _CollectEffect.Play();
+        _sphereCollider.enabled = false;
+        StartCoroutine(Fade());
 
-            CollectablesCounter.AddCollectablesToList(gameObject);
-        }
+        CollectablesCounter.AddCollectablesToList(gameObject);
     }
     private void SendScore()
     {
@@ -41,7 +42,7 @@ public class CollectableSphereInfinity : MonoBehaviour
         _sound.Play();
     }
 
-    IEnumerator Fade()
+    private IEnumerator Fade()
     {
         Renderer renderer = GetComponent<Renderer>();
         Color c = renderer.material.color;

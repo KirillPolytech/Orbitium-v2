@@ -563,5 +563,5 @@ Library/Bee/artifacts/2000b0aEDbg.dag/Assembly-CSharp-Editor.pdb
 Library/Bee/artifacts/2000b0aEDbg.dag/Assembly-CSharp-Editor.dll
 Library/ArtifactDB
 Temp/FSTimeGet-d3b96db1619c991459dd95aa550a70f5
-Temp
-Library
+Temp/
+Library/

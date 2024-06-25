@@ -4,7 +4,7 @@ public class StaticPlanet : MonoBehaviour
 {
     private AudioSource _staticPlanetSound;
     private Gravitation _gravity;
-    private MovementPredictionInfinity _prediction;
+    private MovementPrediction _prediction;
     private Rigidbody _rb;
     
     private void Start()

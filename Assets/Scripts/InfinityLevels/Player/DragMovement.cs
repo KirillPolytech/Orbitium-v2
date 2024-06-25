@@ -6,14 +6,15 @@ public class DragMovement : MonoBehaviour, IStateConfigurator
     private const float MaxRayDistance = 500f;
     
     [Range(0,1f) ][SerializeField] private float Force = 1f;
-
+    
+    private MovementDirectionLine _line;
+    private MainPlayer _player;
+    private StaminaController _staminaController;
     private bool _isHoldingLeftButtonDown;
     private Vector2 _mousePosition;
-    private MainPlayer _player;
     private Rigidbody _rb;
     private Vector3 _gravityDirection = Vector3.zero;
     private Vector3 _lastPosition;
-    private MovementDirectionLine _line;
     private bool _isEnabled;
     
     public void Awake()
@@ -21,6 +22,7 @@ public class DragMovement : MonoBehaviour, IStateConfigurator
         _player = GetComponent<MainPlayer>();
         _rb = GetComponent<Rigidbody>();
         _line = GetComponent<MovementDirectionLine>();
+        _staminaController = GetComponent<StaminaController>();
 
         _lastPosition = _player.transform.position;
 
@@ -60,19 +62,19 @@ public class DragMovement : MonoBehaviour, IStateConfigurator
 
         if (Physics.Raycast(cameraRay, out var spotHit, MaxRayDistance))
         {
-            if (!spotHit.collider.CompareTag("Player") && _isHoldingLeftButtonDown && _player.Stamina > 0f)
+            if (!spotHit.collider.CompareTag("Player") && _isHoldingLeftButtonDown && _staminaController.StaminaNormalized > 0f)
             {
                 Vector3 direction = spotHit.point - transform.position;
                 direction.y = 0;
 
                 _rb.velocity = direction * Force + _gravityDirection;
 
-                _player.WasteStamina();
+                _staminaController.Waste();
 
                 _line.SetLinePosition(spotHit, gameObject);
             }
 
-            if (_player.Stamina <= 0f)
+            if (_staminaController.StaminaNormalized <= 0f)
             {
                 _line.ResetLinePosition();
             }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class PauseState : State
 {
@@ -13,6 +14,8 @@ public class PauseState : State
         {
             state.SetState(false);
         }
+
+        Time.timeScale = 0;
     }
 
     public override void ExitState()

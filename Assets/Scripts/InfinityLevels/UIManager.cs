@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,31 +11,33 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI CollectablesText;
     [Header("Images")]
     [SerializeField] private Image StaminaImage;
-    [Header("Canvases")]
-    [SerializeField] private Canvas GameOverCanvas;
-    [SerializeField] private Canvas ExitCanvas;
     [Header("Toggles")]
-    [SerializeField] private Toggle GodMode;
+    [SerializeField] private Toggle godMode;
 
     private FPS _fps;
     private InGameTime _inGameTime;
     private MainPlayer _player;
+    private StaminaController _staminaController;
+    private InGameWindowsController _inGameWindowsController;
+    private GamePlayEntryPoint _gamePlayEntryPoint;
+    private bool _isPauseButtonDown;
     
     public void Awake()
     {
         _player = FindAnyObjectByType<MainPlayer>();
+        _staminaController = FindAnyObjectByType<StaminaController>();
         _fps = FindAnyObjectByType<FPS>();
         _inGameTime = FindAnyObjectByType<InGameTime>();
+        _inGameWindowsController = FindAnyObjectByType<InGameWindowsController>();
+        _gamePlayEntryPoint = FindAnyObjectByType<GamePlayEntryPoint>();
 
-        // After Restart Settings.
-        GameOverCanvas.enabled = false;
         TimeText.text = "0.0";
-        //
 
-        _player.EventAtDeath += EnableDeadScreen;
+        _player.EventAtDeath += () => _inGameWindowsController.OpenWindow(_inGameWindowsController.GameOver);
+        
         _player.EventAtCollect += UpdateCollectablesText;
 
-        GodMode.onValueChanged.AddListener( _ => { _player.SetGodMode(GodMode.isOn); });
+        godMode.onValueChanged.AddListener( _ => { _player.SetGodMode(godMode.isOn); });
 
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -50,11 +51,11 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        StaminaImage.fillAmount = _player.Stamina / 100;
+        StaminaImage.fillAmount = _staminaController.StaminaNormalized;
 
         UpdateTime();
         UpdateFPSCounter();
-        ExitScreen();
+        HandleInput();
     }
 
     private void UpdateFPSCounter()
@@ -70,28 +71,33 @@ public class UIManager : MonoBehaviour
         TimeText.text = $"Time: {minutes:00}m:{seconds:00}s:{miliseconds:000}ms";
     }
 
-    public void EnableDeadScreen()
+    private void HandleInput()
     {
-        GameOverCanvas.enabled = true;
+        if (!Input.GetKeyDown(GlobalVariables.Exit))
+            return;
+
+        ChangeExitScreenState();
     }
 
-    private void ExitScreen()
-    {       
-        if (Input.GetKeyDown(KeyCode.Escape))
+    public void ChangeExitScreenState()
+    {
+        _isPauseButtonDown = !_isPauseButtonDown;
+
+        if (_isPauseButtonDown)
         {
-            TimeManagement.FreezeeTime();
-            ExitCanvas.enabled = true;
+            _gamePlayEntryPoint.InGameStateMachine.SetState(_gamePlayEntryPoint.InGameStateMachine.PauseState);
+            _inGameWindowsController.OpenWindow(_inGameWindowsController.Quit);
+        }
+        else
+        {
+            _gamePlayEntryPoint.InGameStateMachine.SetState(_gamePlayEntryPoint.InGameStateMachine.ActiveState);
+            _inGameWindowsController.OpenWindow(_inGameWindowsController.Main);
         }
     }
 
-    public void ReturnToMenu()
+    private void UpdateCollectablesText(int collectables)
     {
-        SceneManager.LoadScene(0);
-    }
-
-    public void UpdateCollectablesText(int collectables)
-    {
-        CollectablesText.text = "Orbs: " + collectables;
+        CollectablesText.text = $"Orbs: {collectables}";
     }
 
     public void UpdatePassedLevelsCounter(int num)

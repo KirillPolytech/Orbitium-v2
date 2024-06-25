@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ActiveState : State
 {
@@ -13,6 +14,8 @@ public class ActiveState : State
         {
             state.SetState(true);
         }
+
+        Time.timeScale = 1;
     }
 
     public override void ExitState()
