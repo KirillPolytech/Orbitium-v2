@@ -745,11 +745,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 473689832}
-  - {fileID: 9154270327778517590}
   - {fileID: 8361457480541215291}
   - {fileID: 1321559650061980728}
   - {fileID: 7840890047422105089}
+  - {fileID: 473689832}
+  - {fileID: 9154270327778517590}
   - {fileID: 1753100357277364019}
   m_Father: {fileID: 738467764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1691,10 +1691,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2428804e209aa9544b41e642f002d726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelPassed: {fileID: 8631281627687714455}
-  TimeText: {fileID: 446096333522930531}
-  FPS: {fileID: 473689834}
-  CollectablesText: {fileID: 1256548615}
+  levelPassed: {fileID: 8631281627687714455}
+  timeText: {fileID: 446096333522930531}
+  fps: {fileID: 473689834}
+  collectablesText: {fileID: 1256548615}
   StaminaImage: {fileID: 20368099}
   godMode: {fileID: 8919056834193273780}
 --- !u!114 &965847689
@@ -2723,10 +2723,6 @@ PrefabInstance:
     - target: {fileID: 5071899102858680886, guid: 2563b0d7fb7351c45a87516c973d549b, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 8564499413882120676, guid: 2563b0d7fb7351c45a87516c973d549b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5255,7 +5251,7 @@ GameObject:
   - component: {fileID: 3319962974997816901}
   - component: {fileID: 446096333522930531}
   m_Layer: 0
-  m_Name: Time
+  m_Name: TimeText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5368,7 +5364,7 @@ GameObject:
   - component: {fileID: 6303625363894254025}
   - component: {fileID: 8631281627687714455}
   m_Layer: 0
-  m_Name: Level
+  m_Name: LevelPassed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

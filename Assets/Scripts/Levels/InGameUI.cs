@@ -4,10 +4,11 @@ using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    [Header("Texts")] [SerializeField] private TextMeshProUGUI LevelPassed;
-    [SerializeField] private TextMeshProUGUI TimeText;
-    [SerializeField] private TextMeshProUGUI FPS;
-    [SerializeField] private TextMeshProUGUI CollectablesText;
+    [Header("Texts")] 
+    [SerializeField] private TextMeshProUGUI levelPassed;
+    [SerializeField] private TextMeshProUGUI timeText;
+    [SerializeField] private TextMeshProUGUI fps;
+    [SerializeField] private TextMeshProUGUI collectablesText;
     [Header("Images")] [SerializeField] private Image StaminaImage;
     [Header("Toggles")] [SerializeField] private Toggle godMode;
 
@@ -30,7 +31,7 @@ public class InGameUI : MonoBehaviour
         _gamePlayEntryPoint = FindAnyObjectByType<GamePlayEntryPoint>();
         _blackScreen = FindAnyObjectByType<BlackScreen>();
 
-        TimeText.text = "0.0";
+        timeText.text = "0.0";
 
         _player.EventAtDeath += () => _inGameWindowsController.OpenWindow(_inGameWindowsController.GameOver);
 
@@ -64,7 +65,7 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateFPSCounter()
     {
-        FPS.text = $"FPS {_fps.DeltaTime}";
+        fps.text = $"FPS {_fps.DeltaTime}";
     }
 
     private void UpdateTime()
@@ -72,7 +73,7 @@ public class InGameUI : MonoBehaviour
         decimal minutes = _inGameTime.Minutes;
         decimal seconds = _inGameTime.Seconds;
         decimal miliseconds = _inGameTime.MiliSeconds;
-        TimeText.text = $"Time: {minutes:00}m:{seconds:00}s:{miliseconds:000}ms";
+        timeText.text = $"Time: {minutes:00}m:{seconds:00}s:{miliseconds:000}ms";
     }
 
     private void HandleInput()
@@ -101,11 +102,11 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateCollectablesText(int collectables)
     {
-        CollectablesText.text = $"Orbs: {collectables}";
+        collectablesText.text = $"Orbs: {collectables}";
     }
 
     public void UpdatePassedLevelsCounter(int num)
     {
-        LevelPassed.text = $"Level: {num}";
+        levelPassed.text = $"Level: {num}";
     }
 }

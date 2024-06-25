@@ -2537,7 +2537,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 732403887}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Menu, Assembly-CSharp
         m_MethodName: LoadRunnerScene
         m_Mode: 1
@@ -3542,7 +3542,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 558706299}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -3814,9 +3814,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: OpenMenu
+      - m_Target: {fileID: 1154876538}
+        m_TargetAssemblyTypeName: WindowsController, Assembly-CSharp
+        m_MethodName: OpenWindow
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 732403888}
@@ -4067,7 +4067,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 609910850}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -4723,7 +4723,6 @@ GameObject:
   - component: {fileID: 732403884}
   - component: {fileID: 732403883}
   - component: {fileID: 732403882}
-  - component: {fileID: 732403887}
   - component: {fileID: 732403888}
   m_Layer: 5
   m_Name: MainCanvas
@@ -4819,18 +4818,6 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &732403887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732403881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f73fee880bdd1684aace4a38b7212dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &732403888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5422,7 +5409,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 796666405}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -7282,7 +7269,6 @@ GameObject:
   - component: {fileID: 1157248649}
   - component: {fileID: 1157248648}
   - component: {fileID: 1157248647}
-  - component: {fileID: 1157248646}
   - component: {fileID: 1157248645}
   m_Layer: 5
   m_Name: OnlineCanvas (Anonyme)
@@ -7305,18 +7291,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowName: Online Anonyme
   isOpened: 0
---- !u!114 &1157248646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1157248644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f73fee880bdd1684aace4a38b7212dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1157248647
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7461,7 +7435,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1157248644}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -8940,7 +8914,6 @@ GameObject:
   - component: {fileID: 1348339675}
   - component: {fileID: 1348339674}
   - component: {fileID: 1348339673}
-  - component: {fileID: 1348339678}
   - component: {fileID: 1348339677}
   - component: {fileID: 1348339679}
   m_Layer: 5
@@ -8997,7 +8970,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348339672}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -9051,18 +9024,6 @@ MonoBehaviour:
   Nick: {fileID: 152662762}
   Time: {fileID: 1474411139}
   Orbs: {fileID: 493376638}
---- !u!114 &1348339678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1348339672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f73fee880bdd1684aace4a38b7212dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1348339679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10035,51 +9996,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570128578}
   m_CullTransparentMesh: 1
---- !u!1 &1574106149
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1574106151}
-  - component: {fileID: 1574106150}
-  m_Layer: 0
-  m_Name: TimeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1574106150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574106149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16320caf9f5b04d459ed31bc24a66ec3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isTimeFreezed: 0
---- !u!4 &1574106151
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1574106149}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 842.80225, y: 503.40704, z: -34.22711}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584406689
 GameObject:
   m_ObjectHideFlags: 0
@@ -10479,7 +10395,6 @@ GameObject:
   - component: {fileID: 1667859890}
   - component: {fileID: 1667859889}
   - component: {fileID: 1667859888}
-  - component: {fileID: 1667859887}
   - component: {fileID: 1667859886}
   m_Layer: 5
   m_Name: OnlineCanvas (Logged)
@@ -10502,18 +10417,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windowName: Online Logged
   isOpened: 0
---- !u!114 &1667859887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1667859885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f73fee880bdd1684aace4a38b7212dd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1667859888
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10658,7 +10561,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667859885}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -11115,7 +11018,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748875487}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -13403,7 +13306,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1955147616}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -14860,9 +14763,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: OpenMenu
+      - m_Target: {fileID: 1154876538}
+        m_TargetAssemblyTypeName: WindowsController, Assembly-CSharp
+        m_MethodName: OpenWindow
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 558706304}
@@ -15237,7 +15140,6 @@ SceneRoots:
   - {fileID: 13015832}
   - {fileID: 101099655}
   - {fileID: 1836410833}
-  - {fileID: 1574106151}
   - {fileID: 1899201918}
   - {fileID: 927858947}
   - {fileID: 897833947}
