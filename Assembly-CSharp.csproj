@@ -110,6 +110,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Mechanics\CollisionWithSun.cs" />
     <Compile Include="Assets\Scripts\Casual Mode\Collectable\CollectablesManager.cs" />
+    <Compile Include="Assets\Scripts\WindowController\InGameWindowsController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />

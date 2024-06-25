@@ -462,6 +462,7 @@
 "Assets/Scripts/WebLogic/RequestType.cs"
 "Assets/Scripts/WebLogic/WebManager.cs"
 "Assets/Scripts/WebLogic/WebUIController.cs"
+"Assets/Scripts/WindowController/InGameWindowsController.cs"
 "Assets/Scripts/WindowController/MenuWindowsController.cs"
 "Assets/Scripts/WindowController/WindowsController.cs"
 "Assets/TextMesh Pro/Examples & Extras/Scripts/Benchmark01.cs"

@@ -13,19 +13,22 @@ public class UIManager : MonoBehaviour
     [Header("Images")]
     [SerializeField] private Image StaminaImage;
     [Header("Canvases")]
-    [SerializeField] private Canvas WinCanvas;
     [SerializeField] private Canvas GameOverCanvas;
     [SerializeField] private Canvas ExitCanvas;
     [Header("Toggles")]
     [SerializeField] private Toggle GodMode;
 
+    private FPS _fps;
+    private InGameTime _inGameTime;
     private MainPlayer _player;
+    
     public void Awake()
     {
         _player = FindAnyObjectByType<MainPlayer>();
+        _fps = FindAnyObjectByType<FPS>();
+        _inGameTime = FindAnyObjectByType<InGameTime>();
 
         // After Restart Settings.
-        WinCanvas.enabled = false;
         GameOverCanvas.enabled = false;
         TimeText.text = "0.0";
         //
@@ -33,7 +36,7 @@ public class UIManager : MonoBehaviour
         _player.EventAtDeath += EnableDeadScreen;
         _player.EventAtCollect += UpdateCollectablesText;
 
-        GodMode.onValueChanged.AddListener( (bool x) => { _player.SetGodMode(GodMode.isOn); });
+        GodMode.onValueChanged.AddListener( _ => { _player.SetGodMode(GodMode.isOn); });
 
 
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -49,17 +52,22 @@ public class UIManager : MonoBehaviour
     {
         StaminaImage.fillAmount = _player.Stamina / 100;
 
+        UpdateTime();
+        UpdateFPSCounter();
         ExitScreen();
     }
 
-    public void UpdateFPSCounter(float time)
+    private void UpdateFPSCounter()
     {
-        FPS.text = "FPS: " + (int)(1.0f / time);
+        FPS.text = $"FPS {_fps.DeltaTime}";
     }
 
-    public void UpdateTime(decimal minutes, decimal seconds, decimal miliseconds)
+    private void UpdateTime()
     {
-        TimeText.text = "Time: " + minutes + "m:" + seconds + "s" + ":" + miliseconds + "ms";
+        decimal minutes = _inGameTime.Minutes;
+        decimal seconds = _inGameTime.Seconds;
+        decimal miliseconds = _inGameTime.MiliSeconds;
+        TimeText.text = $"Time: {minutes:00}m:{seconds:00}s:{miliseconds:000}ms";
     }
 
     public void EnableDeadScreen()

@@ -132,7 +132,7 @@ namespace Web
             {
                 Orbs = _mainPlayer.Collectables,
                 Nick = _playerService.PlayerData.Nick,
-                Time = _timer.GetTime
+                Time = _timer.CurrentTime
             };
 
             _playerService.UpdateData(data);

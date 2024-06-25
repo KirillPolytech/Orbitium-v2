@@ -2,12 +2,7 @@ using UnityEngine;
 
 public class FPS : MonoBehaviour
 {
-    private float deltaTime;
-    private UIManager UI;
-    private void Awake()
-    {
-        UI = FindAnyObjectByType<UIManager>();
-    }
+    public float DeltaTime { get; private set; }
 
     private void Update()
     {
@@ -16,8 +11,6 @@ public class FPS : MonoBehaviour
 
     private void FPSCounter()
     {
-        deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
-        UI.UpdateFPSCounter(deltaTime);
-
+        DeltaTime = (int)(1f / Time.unscaledDeltaTime); //+= (Time.deltaTime - DeltaTime) * 0.1f;
     }
 }
