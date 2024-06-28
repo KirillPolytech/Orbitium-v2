@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class LevelCreator : MonoBehaviour
 {
-    private LevelsStorage _levelsStorage;
+    private LevelStorage _levelStorage;
     private LevelSpawner _levelSpawner;
     
     public void Awake()
     {
-        _levelsStorage = FindAnyObjectByType<LevelsStorage>();
+        _levelStorage = FindAnyObjectByType<LevelStorage>();
         _levelSpawner = FindAnyObjectByType<LevelSpawner>();
     }
     
@@ -29,7 +29,7 @@ public class LevelCreator : MonoBehaviour
 
         _levelSpawner.DeleteLevel();
 
-        _levelsStorage.IncreasePassedLevels();
+        _levelStorage.IncreasePassedLevels();
 
         Destroy(this);
     }

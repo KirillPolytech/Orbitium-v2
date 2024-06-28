@@ -1,44 +1,49 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class InGameUI : MonoBehaviour
 {
-    [Header("Texts")] 
     [SerializeField] private TextMeshProUGUI levelPassed;
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI fps;
     [SerializeField] private TextMeshProUGUI collectablesText;
-    [Header("Images")] [SerializeField] private Image StaminaImage;
-    [Header("Toggles")] [SerializeField] private Toggle godMode;
+    [SerializeField] private Image StaminaImage;
+    [SerializeField] private Toggle godMode;
 
+    private MainPlayer _player;
     private FPS _fps;
     private InGameTime _inGameTime;
-    private MainPlayer _player;
     private StaminaController _staminaController;
     private InGameWindowsController _inGameWindowsController;
-    private GamePlayEntryPoint _gamePlayEntryPoint;
     private BlackScreen _blackScreen;
+    private InGameStateMachine _inGameStateMachine;
     private bool _isPauseButtonDown;
 
-    public void Awake()
+    [Inject]
+    public void Construct(MainPlayer player, StaminaController staminaController, FPS fps, InGameTime inGameTime,
+        InGameWindowsController inGameWindowsController, BlackScreen blackScreen,
+        InGameStateMachine inGameStateMachine
+    )
     {
-        _player = FindAnyObjectByType<MainPlayer>();
-        _staminaController = FindAnyObjectByType<StaminaController>();
-        _fps = FindAnyObjectByType<FPS>();
-        _inGameTime = FindAnyObjectByType<InGameTime>();
-        _inGameWindowsController = FindAnyObjectByType<InGameWindowsController>();
-        _gamePlayEntryPoint = FindAnyObjectByType<GamePlayEntryPoint>();
-        _blackScreen = FindAnyObjectByType<BlackScreen>();
+        _player = player;
+        _staminaController = staminaController;
+        _fps = fps;
+        _inGameTime = inGameTime;
+        _inGameWindowsController = inGameWindowsController;
+        _blackScreen = blackScreen;
+        _inGameStateMachine = inGameStateMachine;
 
+        Initialize();
+    }
+
+    private void Initialize()
+    {
         timeText.text = "0.0";
-
         _player.EventAtDeath += () => _inGameWindowsController.OpenWindow(_inGameWindowsController.GameOver);
-
         _player.EventAtCollect += UpdateCollectablesText;
-
         godMode.onValueChanged.AddListener(_ => { _player.SetGodMode(godMode.isOn); });
-
 
 #if UNITY_WEBGL && !UNITY_EDITOR
                 MainPlayer.Instance.EventAtDeath += () => { 
@@ -56,11 +61,15 @@ public class InGameUI : MonoBehaviour
 
     private void Update()
     {
-        StaminaImage.fillAmount = _staminaController.StaminaNormalized;
-
+        UpdateStamina();
         UpdateTime();
         UpdateFPSCounter();
         HandleInput();
+    }
+
+    private void UpdateStamina()
+    {
+        StaminaImage.fillAmount = _staminaController.StaminaNormalized;
     }
 
     private void UpdateFPSCounter()
@@ -90,12 +99,12 @@ public class InGameUI : MonoBehaviour
 
         if (_isPauseButtonDown)
         {
-            _gamePlayEntryPoint.InGameStateMachine.SetState(_gamePlayEntryPoint.InGameStateMachine.PauseState);
+            _inGameStateMachine.SetState(_inGameStateMachine.PauseState);
             _inGameWindowsController.OpenWindow(_inGameWindowsController.Quit);
         }
         else
         {
-            _gamePlayEntryPoint.InGameStateMachine.SetState(_gamePlayEntryPoint.InGameStateMachine.ActiveState);
+            _inGameStateMachine.SetState(_inGameStateMachine.ActiveState);
             _inGameWindowsController.OpenWindow(_inGameWindowsController.Main);
         }
     }

@@ -15,10 +15,4 @@ public class StaticPlanet : MonoBehaviour
         _staticPlanetSound.priority = 0;
         _staticPlanetSound.Play();
     }
-    
-    // private void OnCollisionEnter(Collision collision)
-    // {
-    //     if (collision.gameObject.GetComponent<Rigidbody>())
-    //         collision.gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)));
-    // }
 }

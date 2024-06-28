@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class WinPlanet : MonoBehaviour
 {
@@ -6,20 +7,23 @@ public class WinPlanet : MonoBehaviour
     [SerializeField] Material _activeMaterial;
 
     private MainPlayer _player;
-    private Material _currentMaterial;
+    private MeshRenderer _meshRenderer;
 
-    private void Start()
+    [Inject]
+    public void Construct(MainPlayer player)
     {
-        //_player = MainPlayer.Instance.GetComponent<MainPlayer>();
+        _player = player;
+        
+        _meshRenderer = GetComponent<MeshRenderer>();
 
-        _currentMaterial = GetComponent<MeshRenderer>().material;
+        _player.EventAtCollect += Activate;
     }
 
-    private void FixedUpdate()
+    private void Activate(int collectablesAmount)
     {
-        _currentMaterial = _player.Collectables != CollectablesManager.GetCountOfCollectables()
-            ? _deactiveMaterial
-            : _activeMaterial;
-        GetComponent<MeshRenderer>().material = _currentMaterial;
+        if (collectablesAmount != CollectablesManager.GetCountOfCollectables())
+            return;
+
+        _meshRenderer.material = _activeMaterial;
     }
 }

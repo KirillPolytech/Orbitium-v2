@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 public class LevelSpawner : MonoBehaviour
 {
@@ -10,11 +11,12 @@ public class LevelSpawner : MonoBehaviour
     private int _stepBetweenLevels = 50;
     private int _index;
     private int _minLevel, _maxLevel = 10;
-    private LevelsStorage _levelsStorage;
+    private LevelStorage _levelStorage;
 
-    private void Start()
+    [Inject]
+    public void Construct(LevelStorage levelStorage)
     {
-        _levelsStorage = FindAnyObjectByType<LevelsStorage>();
+        _levelStorage = levelStorage;
         
         for (int i = 0; i < 2; i++)
         {
@@ -29,21 +31,21 @@ public class LevelSpawner : MonoBehaviour
 
         if (_index == LevelsCount)
         {
-            _tempLevelGameObject = Instantiate(_levelsStorage.GetFinalLevel);
+            _tempLevelGameObject = Instantiate(_levelStorage.GetFinalLevel);
             _tempLevelGameObject.transform.position = new Vector3(0, 0, _stepBetweenLevels);
             _index++;
             return;
         }
 
         _minLevel = Mathf.Clamp( _index - _maxLevel, 0, int.MaxValue);
-        _maxLevel = Mathf.Clamp( _minLevel + 10, 0, _levelsStorage.GetLevelsPrefabsLength() - 1);
+        _maxLevel = Mathf.Clamp( _minLevel + 10, 0, _levelStorage.GetLevelsPrefabsLength() - 1);
 
-        _tempLevelGameObject = Instantiate(_levelsStorage.GetLevelPrefab(Random.Range(_minLevel, _maxLevel)) );
+        _tempLevelGameObject = Instantiate(_levelStorage.GetLevelPrefab(Random.Range(_minLevel, _maxLevel)) );
 
         _tempLevelGameObject.transform.position = new Vector3(0, 0, _stepBetweenLevels);
         _stepBetweenLevels += 100;
 
-        _levelsStorage.AddLevelToList(_tempLevelGameObject);
+        _levelStorage.AddLevelToList(_tempLevelGameObject);
         //Debug.Log("index: " + (__index - 2));
         //Debug.Log(__stepBetweenLevels);
         _index++;
@@ -51,6 +53,6 @@ public class LevelSpawner : MonoBehaviour
 
     public void DeleteLevel()
     {
-        _levelsStorage.DeleteLevel(_index - 4); //__index - 4
+        _levelStorage.DeleteLevel(_index - 4); //__index - 4
     }
 }
