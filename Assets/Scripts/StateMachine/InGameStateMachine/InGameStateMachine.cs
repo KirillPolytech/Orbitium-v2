@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class InGameStateMachine : StateMachine
 {
@@ -11,12 +12,14 @@ public class InGameStateMachine : StateMachine
     private DragMovement _dragMovement;
     private InGameWindowsController _inGameWindowsController;
 
-    public void Initialize()
+    [Inject]
+    public void Construct(MainPlayer mainPlayer, InGameTime inGameTime, DragMovement dragMovement, InGameWindowsController
+        inGameWindowsController)
     {
-        _inGameTime = Object.FindAnyObjectByType<InGameTime>();
-        _mainPlayer = Object.FindAnyObjectByType<MainPlayer>();
-        _dragMovement = _mainPlayer.GetComponent<DragMovement>();
-        _inGameWindowsController = Object.FindAnyObjectByType<InGameWindowsController>();
+        _inGameTime = inGameTime;
+        _mainPlayer = mainPlayer;
+        _dragMovement = dragMovement;
+        _inGameWindowsController = inGameWindowsController;
 
         List<IStateConfigurator> iStateConfigurator = new List<IStateConfigurator>
         {

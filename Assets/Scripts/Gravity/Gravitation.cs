@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Gravitation : MonoBehaviour
@@ -30,6 +31,14 @@ public class Gravitation : MonoBehaviour
             return;
         
         other.GetComponent<DragMovement>().SetGravityDirection(gravityDirection, _rb, GravitationConstant);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!other.gameObject.CompareTag(TagStorage.Player))
+            return;
+        
+        other.GetComponent<DragMovement>().SetGravityDirection(Vector3.zero, null, 0);
     }
 
     private void FixedUpdate()

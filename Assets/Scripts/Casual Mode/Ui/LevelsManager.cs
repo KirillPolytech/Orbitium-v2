@@ -15,6 +15,7 @@ public class LevelsManager : MonoBehaviour
 
     private static GameObject[] _levelsScore = new GameObject[35];
     private static GameObject[] _levelsTime = new GameObject[35];
+    
     private void Awake()
     {
         GetLevelsScore();
@@ -38,12 +39,13 @@ public class LevelsManager : MonoBehaviour
 
         GetLevels();
     }
+    
     private void GetLevels()
     {
         _selectLevelCanvas.SetActive(true);
         for (int i = 0; i < 30; i++)
         {
-            _availableLevels[i] = GameObject.Find(Convert.ToString(i + 2)); // получаем 2-21 уровнень.
+            _availableLevels[i] = GameObject.Find(Convert.ToString(i + 2)); // РїРѕР»СѓС‡Р°РµРј 2-21 СѓСЂРѕРІРЅРµРЅСЊ.
             if (_availableLevels[i] && _isLevelDone[i + 2] == 0)
             {
                 _availableLevels[i].GetComponent<Button>().enabled = false;
@@ -52,6 +54,7 @@ public class LevelsManager : MonoBehaviour
         }
         _selectLevelCanvas.SetActive(false);
     }
+    
     private void GetLevelsScore()
     {
         _selectLevelCanvas.SetActive(true);
@@ -67,6 +70,7 @@ public class LevelsManager : MonoBehaviour
 
         _selectLevelCanvas.SetActive(false);
     }
+    
     private void GetLevelsTime()
     {
         _selectLevelCanvas.SetActive(true);
@@ -82,6 +86,7 @@ public class LevelsManager : MonoBehaviour
 
         _selectLevelCanvas.SetActive(false);
     }
+    
     private void SetLevelsScore()
     {
         _selectLevelCanvas.SetActive(true);
@@ -97,6 +102,7 @@ public class LevelsManager : MonoBehaviour
 
         _selectLevelCanvas.SetActive(false);
     }
+    
     private void SetLevelsTime()
     {
         _selectLevelCanvas.SetActive(true);

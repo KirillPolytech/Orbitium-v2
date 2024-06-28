@@ -5,11 +5,11 @@ public class ClusterRotatioAroundCenter : MonoBehaviour
     [SerializeField] private GameObject[] _gameObjects;
     [SerializeField] private float r = 15f;
     [SerializeField] private float rotationSpeed = 0.02f;
-    [SerializeField] private float k = 0;
+    [SerializeField] private float k;
 
     [SerializeField] private bool isRadiusChange;
-    [SerializeField] private float minR = 0;
-    [SerializeField] private float maxR = 0;
+    [SerializeField] private float minR;
+    [SerializeField] private float maxR;
     [SerializeField] private float radiusChangeSpeed = 0.5f;
 
     [SerializeField] private Vector3 _center = Vector3.zero;
@@ -17,7 +17,7 @@ public class ClusterRotatioAroundCenter : MonoBehaviour
     private float x, z;
     private float angle;
     private int i;
-    private bool isMax = false;
+    private bool isMax;
     private void FixedUpdate()
     {
         if (isRadiusChange)
