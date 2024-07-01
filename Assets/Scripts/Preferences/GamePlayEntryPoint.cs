@@ -1,17 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 public class GamePlayEntryPoint : MonoBehaviour
 {
-    public InGameStateMachine InGameStateMachine { get; private set; }
-
-    [Inject]
-    public void Construct(InGameStateMachine inGameStateMachine)
-    {
-        InGameStateMachine = inGameStateMachine;
-    }
-
     private void Awake()
     {
         GameEntryPoint.Instance.Initialize();

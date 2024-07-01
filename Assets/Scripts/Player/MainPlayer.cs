@@ -3,23 +3,22 @@ using UnityEngine;
 
 public class MainPlayer : MonoBehaviour, IStateConfigurator
 {
-    public Action EventAtDeath;
-    public Action<int> EventAtCollect;
-    
+    public event Action EventAtDeath;
+    public event Action<int> EventAtCollect;
+    public event Action EventAtCollision;
+
     [SerializeField] private ParticleSystem deathParticleSystem;
 
     public int Collectables { get; private set; }
     public Statements PlayerState { get; private set; } = Statements.Alive;
 
     private Rigidbody _rb;
-    private AudioSource _hitSound;
     private Renderer _renderer;
 
     public void Awake()
     {
         _rb = GetComponent<Rigidbody>();
         _renderer = GetComponent<Renderer>();
-        _hitSound = GetComponent<AudioSource>();
 
         deathParticleSystem.Stop();
 
@@ -38,12 +37,13 @@ public class MainPlayer : MonoBehaviour, IStateConfigurator
     {
         PlayerState = state ? Statements.God : Statements.Alive;
 
-        Debug.Log($"God mode updated: {PlayerState} {state})");
+        Debug.Log($"God mode updated: {state})");
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        PlayHitSound();
+        EventAtCollision?.Invoke();
+        
         if (PlayerState != Statements.God)
         {
             if (collision.collider.CompareTag(TagStorage.Wall) || collision.collider.CompareTag(TagStorage.Enemy))
@@ -59,20 +59,15 @@ public class MainPlayer : MonoBehaviour, IStateConfigurator
         _renderer.enabled = false;
         deathParticleSystem.Play();
 
-        EventAtDeath.Invoke();
+        EventAtDeath?.Invoke();
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag("Collectables"))
             return;
-        
-        EventAtCollect?.Invoke(++Collectables);
-    }
 
-    private void PlayHitSound()
-    {
-        _hitSound.Play();
+        EventAtCollect?.Invoke(++Collectables);
     }
 
     public void SetState(bool state)

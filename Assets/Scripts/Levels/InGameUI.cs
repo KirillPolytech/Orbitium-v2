@@ -9,7 +9,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeText;
     [SerializeField] private TextMeshProUGUI fps;
     [SerializeField] private TextMeshProUGUI collectablesText;
-    [SerializeField] private Image StaminaImage;
+    [SerializeField] private Image staminaImage;
     [SerializeField] private Toggle godMode;
 
     private MainPlayer _player;
@@ -69,7 +69,7 @@ public class InGameUI : MonoBehaviour
 
     private void UpdateStamina()
     {
-        StaminaImage.fillAmount = _staminaController.StaminaNormalized;
+        staminaImage.fillAmount = _staminaController.StaminaNormalized;
     }
 
     private void UpdateFPSCounter()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,8 +6,6 @@ using Zenject;
 
 public class LevelStorage : MonoBehaviour
 {
-    private readonly char[] _integers = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
-
     [SerializeField] private GameObject FirstLevel;
     [SerializeField] private GameObject FinalLevel;
     [SerializeField] private List<GameObject> LevelsPrefabs = new List<GameObject>();
@@ -16,26 +15,27 @@ public class LevelStorage : MonoBehaviour
     private readonly List<GameObject> _levels = new List<GameObject>();
     private int _passedLevels;
     private InGameUI _gameUI;
-    
+
     [Inject]
     public void Construct(InGameUI inGameUI)
     {
         _gameUI = inGameUI;
-        
         _levels.Add(FirstLevel);
+    }
 
-        GameObject[] levelsTemp = Resources.LoadAll<GameObject>("Levels");
-        GameObject[] levelsTempCopy = new GameObject[levelsTemp.Length];
+    public void Initialize(GameObject[] levelPrefabs)
+    {
+        if (levelPrefabs.Length == 0)
+            throw new Exception("Empty prefabs");
 
-        levelsTemp.CopyTo(levelsTempCopy, 0);
-
-        for (int i = 0; i < levelsTemp.Length; i++)
+        foreach (var obj in levelPrefabs)
         {
-            levelsTempCopy[i].name = ParseTextToInt(levelsTemp[i].name);
+            obj.name = TextParser.ParseTextToInt(obj.name);
 
-            LevelsPrefabs.Add(levelsTempCopy[i]) ;
+            LevelsPrefabs.Add(obj);
         }
-        LevelsPrefabs = LevelsPrefabs.OrderByDescending(x => int.Parse(x.name) ).ToList();
+
+        LevelsPrefabs = LevelsPrefabs.OrderByDescending(x => int.Parse(x.name)).ToList();
         LevelsPrefabs.Reverse();
     }
 
@@ -50,44 +50,29 @@ public class LevelStorage : MonoBehaviour
         if (index > -1 && index < _levels.Count)
         {
             if (!_levels[index])
-            {
-                Debug.LogWarning("Level doesnt exist");
-                return;
-            }
+                throw new Exception("Level doesn't exist");
+
             GameObject temp = _levels[index];
-            Debug.Log("Destroyed name: " + temp.name + " index: " + index);
+            Debug.Log($"Destroyed level: {temp.name} index: {index}");
             Destroy(temp);
+            
+            return;
         }
-        else
-        {
-            Debug.LogWarning("index out of range. Index: " + index + "\nLevels count: " + _levels.Count);
-        }
+        
+        throw new Exception($"index out of range. Index: {index} Levels count: {_levels.Count}");
     }
 
     public GameObject GetLevelPrefab(int index)
     {
-        return LevelsPrefabs[ Mathf.Clamp(index,0, GetLevelsPrefabsLength() - 1 )];
+        if (index >= LevelsPrefabs.Count || index < 0)
+            throw new Exception($"Index out of range {index}");
+
+        return LevelsPrefabs[Mathf.Clamp(index, 0, GetPrefabCounts() - 1)];
     }
 
-    public int GetLevelsPrefabsLength()
+    public int GetPrefabCounts()
     {
         return LevelsPrefabs.Count;
-    }
-
-    private string ParseTextToInt(string text)
-    {
-        string output = "";
-        foreach (var t in text)
-        {
-            foreach (var t1 in _integers)
-            {
-                if (t == t1)
-                {
-                    output += t1;                   
-                }
-            }
-        }
-        return output;
     }
 
     public void IncreasePassedLevels()

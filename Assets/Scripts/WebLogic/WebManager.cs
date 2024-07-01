@@ -42,7 +42,7 @@ namespace Web
 
             if (_mainPlayer != null)
             {
-                _mainPlayer.EventAtDeath = SendStatistic;
+                _mainPlayer.EventAtDeath += SendStatistic;
             }
 
             Initializate();

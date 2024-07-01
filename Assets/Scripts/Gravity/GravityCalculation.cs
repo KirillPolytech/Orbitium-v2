@@ -2,9 +2,9 @@ using UnityEngine;
 
 public static class GravityCalculation
 {
-    private const int CriticalDistance = 5;
+    private const float CriticalDistance = 1f;
 
-    public static Vector3 CalculateGravity(Rigidbody current, Rigidbody other, float gravitationConstant)
+    public static Vector3 CalculateGravity(Rigidbody current, Rigidbody other, float gravitationConstant, float radius)
     {
         Vector3 vectorToOther = current.transform.position - other.transform.position;
 
@@ -14,18 +14,16 @@ public static class GravityCalculation
         float currentMass = current.mass;
         float otherMass = other.mass;
 
-        float gravity;
         // F = G * (m1*m2) / R^2 (Gravity).
-        if (distToOther * distToOther < CriticalDistance)
-            gravity = currentMass * otherMass * gravitationConstant / CriticalDistance;
-        else
-            gravity = currentMass * otherMass * gravitationConstant / (distToOther * distToOther);
+        float gravity = distToOther * distToOther < radius
+            ? currentMass * otherMass * gravitationConstant / CriticalDistance
+            : currentMass * otherMass * gravitationConstant / (distToOther * distToOther);
 
         return gravity * dirToOther;
     }
 
     public static Vector3 CalculateGravity(Rigidbody current, Rigidbody other, Vector3 currentPos, Vector3 otherPos,
-        float gravitationConstant)
+        float gravitationConstant, float radius)
     {
         Vector3 vectorToOther = otherPos - currentPos;
 
@@ -33,19 +31,24 @@ public static class GravityCalculation
         Vector3 dirToOther = vectorToOther.normalized;
 
         float currentMass = current.mass;
-        float otherMass;
-        if (other)
-            otherMass = other.mass;
-        else
-            otherMass = 0;
+        float otherMass = other ? other.mass : 0;
 
-        float gravity;
         // F = G * (m1*m2) / R^2 (Gravity).
-        if (distToOther * distToOther < CriticalDistance)
-            gravity = currentMass * otherMass * gravitationConstant / CriticalDistance;
-        else
-            gravity = currentMass * otherMass * gravitationConstant / (distToOther * distToOther);
+        float gravity = distToOther * distToOther < radius
+            ? currentMass * otherMass * gravitationConstant / CriticalDistance
+            : currentMass * otherMass * gravitationConstant / (distToOther * distToOther);
 
         return gravity * dirToOther;
+    }
+
+    private static float CalculateGravityValue(float distToOther, float radius, float currentMass, float otherMass,
+        float gravitationConstant)
+    {
+        // F = G * (m1*m2) / R^2 (Gravity).
+        float gravity = distToOther * distToOther < radius
+            ? currentMass * otherMass * gravitationConstant / radius
+            : currentMass * otherMass * gravitationConstant / (distToOther * distToOther);
+
+        return gravity;
     }
 }

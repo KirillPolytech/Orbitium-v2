@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     private Vector3 _direction;
     private int _timer;
 
-    private void Start()
+    public void OnEnable()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
 
@@ -20,41 +20,29 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!other.gameObject.CompareTag("Player")) 
+            return;
+        
+        _direction = (_player.transform.position - transform.position).normalized;
+        if (_timer > _interval)
         {
-            _direction = (_player.transform.position - transform.position).normalized;
-            if (_timer > _interval)
-            {
-                _rb.AddForce(_direction * Force, ForceMode.Impulse);
-                _timer = 0;
-            }
-
-            _timer++;
+            _rb.AddForce(_direction * Force, ForceMode.Impulse);
+            _timer = 0;
         }
+
+        _timer++;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Player"))
-        {
-            GameObject _tempGameObject = new("DestroyParticleSystem");
-            _tempGameObject.AddComponent<ParticleSystem>();
-            _tempGameObject.GetComponent<ParticleSystemRenderer>().material = _destroyMaterial;
-            _tempGameObject.transform.position = collision.gameObject.transform.position;
+        if (!collision.gameObject.CompareTag("Enemy") && !collision.gameObject.CompareTag("Player")) 
+            return;
+        
+        GameObject tempGameObject = new("DestructionParticleSystem");
+        tempGameObject.AddComponent<ParticleSystem>();
+        tempGameObject.GetComponent<ParticleSystemRenderer>().material = _destroyMaterial;
+        tempGameObject.transform.position = collision.gameObject.transform.position;
 
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }
-/*
- *     [SerializeField] private float Range = 10f;
-    [SerializeField] private int ForceTime = 50;
-float Distance = (Player.transform.position - transform.position).magnitude;
-if (Distance < Range && ForceTime >= 0)
-{
-    Direction = Player.transform.position - transform.position;
-    Rb.AddForce(Direction * Force, ForceMode.Acceleration);
-    ForceTime--;
-}
-*/
-//[SerializeField] private ParticleSystem _destroyEffect;

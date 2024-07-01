@@ -6,9 +6,9 @@ public class GameEntryPoint
     public static GameEntryPoint Instance;
 
     private AsyncOperation _operation;
-    private Loading _loading;
+    private LoadingUI _loadingUI;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSplashScreen)]
     private static void AutoStartGame()
     {
         Instance = new GameEntryPoint();
@@ -16,22 +16,24 @@ public class GameEntryPoint
 
     private GameEntryPoint()
     {
-        _loading = Resources.Load<Loading>("LoadingPrefab");
-        _loading = Object.Instantiate(_loading);
-        Object.DontDestroyOnLoad(_loading);
+        _loadingUI = Resources.Load<LoadingUI>("LoadingPrefab");
+        _loadingUI = Object.Instantiate(_loadingUI);
+        Object.DontDestroyOnLoad(_loadingUI);
 
+#if !UNITY_EDITOR
         LoadScene(SceneNamesStorage.MenuSceneName);
+#endif
     }
 
     public void LoadScene(string sceneName)
     {
-        _loading.SetVisibility(true);
-        
+        _loadingUI.SetVisibility(true);
+
         SceneManager.LoadScene(SceneNamesStorage.BootSceneName);
 
-        _loading.StartLoading(sceneName);
-        
-        _loading.SetVisibility(false);
+        _loadingUI.StartLoading(sceneName);
+
+        _loadingUI.SetVisibility(false);
     }
 
     public void Initialize()

@@ -1,9 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MovementDirectionLine))]
-public class DragMovement : MonoBehaviour, IStateConfigurator
+public class DragMovement : MonoBehaviour, IStateConfigurator, ITrajectoryChanger
 {
     private const float MaxRayDistance = 500f;
+
+    //public event EventOn
 
     [Range(0, 0.05f)] [SerializeField] private float force = 1f;
 
@@ -16,8 +18,7 @@ public class DragMovement : MonoBehaviour, IStateConfigurator
     private Vector2 _mousePosition;
     private Rigidbody _rb, _otherRb;
     private float _gravityConst;
-    private Vector3 _gravityDirection = Vector3.zero;
-    private Vector3 _lastPosition;
+    private Vector3 _gravityDirection, _lastPosition;
     private bool _isEnabled;
 
     public void Awake()
@@ -61,21 +62,11 @@ public class DragMovement : MonoBehaviour, IStateConfigurator
 
         _lastPosition = _player.transform.position;
 
-        if (_otherRb)
-            _trajectory.ShowTrajectory(_rb, _otherRb, transform.position, _otherRb.transform.position, _gravityConst);
-        else
-            _trajectory.ShowTrajectory(_rb, null, transform.position, Vector3.zero, 0);
+        Vector3 otherPos = !_otherRb ? Vector3.zero : _otherRb.transform.position;
+        
+        _trajectory.ShowTrajectory(_rb, _otherRb, transform.position, otherPos, _gravityConst);
 
         DragForce();
-    }
-
-    public void SetGravityDirection(Vector3 gravityDirection, Rigidbody otherRb, float gravityConst)
-    {
-        _gravityDirection = gravityDirection;
-
-        _otherRb = otherRb;
-
-        _gravityConst = gravityConst;
     }
 
     private void DragForce()
@@ -121,10 +112,20 @@ public class DragMovement : MonoBehaviour, IStateConfigurator
     {
         _isEnabled = true;
     }
+
+    public void AddTrajectory(Vector3 gravityDirection, Rigidbody otherRb, float gravityConst)
+    {
+        _gravityDirection = gravityDirection;
+        
+        _rb.velocity += gravityDirection;
+
+        _otherRb = otherRb;
+
+        _gravityConst = gravityConst;
+    }
+
+    public void AddTrajectory(Vector3 direction)
+    {
+        _rb.velocity += direction;
+    }
 }
-/*
-1 - Проверить, держим ли мы кнопку.
-2 - Проверить, убрали ли мы мышку с игрока.
-3 - Создать вектор в направлении точки удара с поверхностью.
-4 - Добавить силу к игроку в направлении этого вектора.
-*/
